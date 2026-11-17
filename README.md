@@ -61,5 +61,5 @@ Third-party libraries: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## بالعربية
 
-**FiberLab Sim** برنامج مجاني يعمل في المتصفح لمحاكاة وصلات الألياف الضوئية في مختبرات طلبة البكالوريوس، ومساعدته متوفرة بالعربية داخل البرنامج (زر «عربي»). [افتح البرنامج](https://alchalaby2004-create.github.io/fiberlab-sim/)
+**FiberLab Sim** برنامج مجاني يعمل في المتصفح لمحاكاة وصلات الألياف الضوئية في مختبرات طلبة البكالوريوس، ومساعدته متوفرة بالعربية داخل البرنامج (زر «عربي»). [افتح البرنامج](https://alchalaby2004-create.github.io/fiberlab-sim/)  
 دليل الطالب بالعربية: [FiberLab_Sim_Student_Guide_AR.docx](docs/FiberLab_Sim_Student_Guide_AR.docx) · للتواصل وطلب ملفات الأستاذ: alchalaby2004@gmail.com
