@@ -1,0 +1,9 @@
+dist/
+node_modules/
+__pycache__/
+# instructor-only files (never commit)
+assignments_key.js
+asgrade.js
+grading.js
+grader.js
+grader.html

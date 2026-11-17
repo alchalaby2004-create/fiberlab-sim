@@ -1,0 +1,67 @@
+  <section class="card model" id="model" aria-labelledby="model-h">
+    <details id="model-d">
+      <summary><h2 id="model-h">Simulator model and equations</h2><span class="foot">How each block is calculated, and where the equations come from</span></summary>
+
+      <h3>1. Signal path</h3>
+      <p>Each component is a separate module with its own ports, settings and equations. When you press Run, the components are run in the order of the wires (from the PRBS generator to the visualizers). The global settings set the bit rate, the sequence length (PRBS, 512 bits) and the samples per bit (16). The optical field is calculated sample by sample; filters and dispersion are applied in the frequency domain with the FFT. Optical wires carry the field; electrical wires carry the current (or the drive level); binary wires carry the bits.</p>
+      <p>The photodetector computes the clean current and leaves the receiver noise "pending"; the low-pass filter after it adds the shot and thermal noise for its own noise bandwidth B<sub>n</sub> (Bessel 4th order: B<sub>n</sub> is calculated from the filter shape).</p>
+
+      <h3>2. Transmitter</h3>
+      <div class="eqs">
+        <div class="eq"><b>Extinction ratio</b><math display="block"><mi>ER</mi><mo>=</mo><mn>10</mn><mspace width="0.2em"/><msub><mi>log</mi><mn>10</mn></msub><mo>(</mo><mfrac><msub><mi>P</mi><mn>1</mn></msub><msub><mi>P</mi><mn>0</mn></msub></mfrac><mo>)</mo></math><small>Direct: 6 dB (default). External: 20 dB.</small></div>
+        <div class="eq"><b>External modulator (MZM)</b><math display="block"><msub><mi>P</mi><mi>out</mi></msub><mo>=</mo><msub><mi>P</mi><mn>0</mn></msub><mo>+</mo><mo>(</mo><msub><mi>P</mi><mn>1</mn></msub><mo>−</mo><msub><mi>P</mi><mn>0</mn></msub><mo>)</mo><msup><mi>sin</mi><mn>2</mn></msup><mo>(</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mi>v</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>)</mo></math><small>Laser stays on; no chirp (balanced drive).</small></div>
+        <div class="eq"><b>Direct modulation: laser response</b><math display="block"><mi>H</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><msup><mrow><mo>(</mo><mi>f</mi><mo>/</mo><msub><mi>f</mi><mi>r</mi></msub><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>j</mi><mfrac><mrow><mi>f</mi><mo>/</mo><msub><mi>f</mi><mi>r</mi></msub></mrow><msub><mi>Q</mi><mi>r</mi></msub></mfrac></mrow></mfrac></math><small>Resonance f<sub>r</sub> (default 12 GHz), damping Q<sub>r</sub> = 1.6.</small></div>
+        <div class="eq"><b>Direct modulation: chirp</b><math display="block"><mi>Δν</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mfrac><mi>α</mi><mrow><mn>4</mn><mi>π</mi></mrow></mfrac><mfrac><mrow><mi>d</mi><mspace width="0.15em"/><mi>ln</mi><mi>P</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>+</mo><mi>κ</mi><mo>(</mo><mi>P</mi><mo>−</mo><mover><mi>P</mi><mo>‾</mo></mover><mo>)</mo></math><small>Transient + adiabatic chirp. α = chirp (linewidth enhancement) factor; κ = 2 GHz/mW.</small></div>
+        <div class="eq"><b>LED response and spectral width</b><math display="block"><mi>H</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>j</mi><mn>2</mn><mi>π</mi><mi>f</mi><mi>τ</mi></mrow></mfrac><mspace width="1.2em"/><mi>Δλ</mi><mo>≈</mo><mn>1.45</mn><msup><mi>λ</mi><mn>2</mn></msup><mi>k</mi><mi>T</mi></math><small>τ = carrier lifetime; λ in µm, kT = 0.0259 eV. FP laser: Δλ set by the user (default 2 nm).</small></div>
+      </div>
+
+      <h3>3. Fiber and DCF</h3>
+      <div class="eqs">
+        <div class="eq"><b>Loss</b><math display="block"><msub><mi>P</mi><mi>out</mi></msub><mo>[</mo><mi>dBm</mi><mo>]</mo><mo>=</mo><msub><mi>P</mi><mi>in</mi></msub><mo>[</mo><mi>dBm</mi><mo>]</mo><mo>−</mo><mi>α</mi><mi>L</mi></math><small>SMF: 2.0 / 0.35 / 0.2 dB/km at 850 / 1310 / 1550 nm. MMF: 2.5 dB/km at 850 nm, 0.8 dB/km otherwise.</small></div>
+        <div class="eq"><b>Dispersion of standard SMF (G.652)</b><math display="block"><mi>D</mi><mo>(</mo><mi>λ</mi><mo>)</mo><mo>=</mo><mfrac><msub><mi>S</mi><mn>0</mn></msub><mn>4</mn></mfrac><mo>(</mo><mi>λ</mi><mo>−</mo><mfrac><msubsup><mi>λ</mi><mn>0</mn><mn>4</mn></msubsup><msup><mi>λ</mi><mn>3</mn></msup></mfrac><mo>)</mo></math><small>λ₀ = 1312 nm, S₀ = 0.092 ps/(nm²·km) → D ≈ 17.4 ps/(nm·km) at 1550 nm.</small></div>
+        <div class="eq"><b>Dispersion on a laser (DFB) signal</b><math display="block"><mi>H</mi><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mi>exp</mi><mo>(</mo><mi>j</mi><mfrac><mrow><mi>π</mi><mspace width="0.1em"/><mi>D</mi><mi>L</mi><mspace width="0.1em"/><msup><mi>λ</mi><mn>2</mn></msup></mrow><mi>c</mi></mfrac><msup><mi>f</mi><mn>2</mn></msup><mo>)</mo></math><small>Applied to the optical field, so chirp and dispersion work together.</small></div>
+        <div class="eq"><b>Dispersion with a wide source (LED, FP)</b><math display="block"><mi>Δτ</mi><mo>=</mo><msqrt><msup><mrow><mo>(</mo><mo>|</mo><mi>D</mi><mo>|</mo><mi>L</mi><mspace width="0.1em"/><mi>Δλ</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>+</mo><msubsup><mi>Δτ</mi><mi>modal</mi><mn>2</mn></msubsup></msqrt><mspace width="1.2em"/><msub><mi>Δτ</mi><mi>modal</mi></msub><mo>=</mo><mfrac><mrow><mn>0.44</mn><mspace width="0.1em"/><mi>L</mi></mrow><msub><mi>BW</mi><mi>modal</mi></msub></mfrac></math><small>Gaussian spreading (FWHM Δτ) of the light intensity. Modal term only for multimode fiber.</small></div>
+      </div>
+
+      <h3>4. EDFA</h3>
+      <div class="eqs">
+        <div class="eq"><b>Gain and ASE noise</b><math display="block"><mi>G</mi><mo>[</mo><mi>dB</mi><mo>]</mo><mo>=</mo><msub><mi>P</mi><mi>out</mi></msub><mo>−</mo><msub><mi>P</mi><mi>in</mi></msub><mspace width="1.2em"/><msub><mi>S</mi><mi>ASE</mi></msub><mo>=</mo><msub><mi>n</mi><mi>sp</mi></msub><mi>h</mi><mi>ν</mi><mo>(</mo><mi>G</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"/><msub><mi>n</mi><mi>sp</mi></msub><mo>≈</mo><mfrac><mi>NF</mi><mn>2</mn></mfrac></math><small>ASE is added as Gaussian noise to the field, then an optical filter (default 50 GHz) is applied.</small></div>
+        <div class="eq"><b>OSNR (0.1 nm = 12.5 GHz)</b><math display="block"><mi>OSNR</mi><mo>=</mo><mfrac><mrow><msub><mi>P</mi><mi>in</mi></msub><mi>G</mi></mrow><mrow><msub><mi>S</mi><mi>ASE</mi></msub><mo>·</mo><mn>12.5</mn><mspace width="0.15em"/><mi>GHz</mi></mrow></mfrac><mspace width="1em"/><mo>≈</mo><mn>58</mn><mo>+</mo><msub><mi>P</mi><mi>in</mi></msub><mo>−</mo><mi>NF</mi><mo>+</mo><mn>3</mn></math><small>The simulator counts the ASE in the signal's polarization only, so its OSNR is about 3 dB above the usual 58 dB rule.</small></div>
+      </div>
+
+      <h3>5. Receiver</h3>
+      <div class="eqs">
+        <div class="eq"><b>Photocurrent</b><math display="block"><mi>I</mi><mo>=</mo><mi>M</mi><mi>R</mi><mi>P</mi><mspace width="1.2em"/><mi>R</mi><mo>=</mo><mfrac><mrow><mi>η</mi><mi>q</mi><mi>λ</mi></mrow><mrow><mi>h</mi><mi>c</mi></mrow></mfrac></math><small>η = 0.8 (R ≈ 1 A/W at 1550 nm). M = 1 for PIN.</small></div>
+        <div class="eq"><b>Noise</b><math display="block"><msubsup><mi>σ</mi><mi>shot</mi><mn>2</mn></msubsup><mo>=</mo><mn>2</mn><mi>q</mi><msup><mi>M</mi><mn>2</mn></msup><mi>F</mi><mi>R</mi><mi>P</mi><msub><mi>B</mi><mi>n</mi></msub><mspace width="1.2em"/><msub><mi>σ</mi><mi>th</mi></msub><mo>=</mo><msub><mi>i</mi><mi>n</mi></msub><msqrt><msub><mi>B</mi><mi>n</mi></msub></msqrt></math><small>i<sub>n</sub> = thermal noise (default 20 pA/√Hz); B<sub>n</sub> = noise bandwidth of the low-pass filter (cut-off 0.75 × bit rate).</small></div>
+        <div class="eq"><b>APD excess noise</b><math display="block"><mi>F</mi><mo>=</mo><mi>k</mi><mi>M</mi><mo>+</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>k</mi><mo>)</mo><mo>(</mo><mn>2</mn><mo>−</mo><mfrac><mn>1</mn><mi>M</mi></mfrac><mo>)</mo></math><small>k = ionization ratio (default 0.5).</small></div>
+        <div class="eq"><b>Decision, Q and BER</b><math display="block"><mi>Q</mi><mo>=</mo><mfrac><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>−</mo><msub><mi>I</mi><mn>0</mn></msub></mrow><mrow><msub><mi>σ</mi><mn>1</mn></msub><mo>+</mo><msub><mi>σ</mi><mn>0</mn></msub></mrow></mfrac><mspace width="1.2em"/><mi>BER</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>erfc</mi><mo>(</mo><mfrac><mi>Q</mi><msqrt><mn>2</mn></msqrt></mfrac><mo>)</mo></math><small>Means and standard deviations are measured on the simulated samples at the best sampling time (Gaussian noise assumed).</small></div>
+      </div>
+
+      <h3>6. Limits of the model</h3>
+      <ul>
+        <li>No fiber nonlinear effects (SPM, XPM, FWM), no PMD, no polarization effects.</li>
+        <li>LED and FP lasers are treated as incoherent sources: dispersion spreads their intensity (Gaussian spreading), not their field.</li>
+        <li>Q is calculated from 512 bits with a Gaussian-noise assumption; very small BER values are calculated from Q, not counted.</li>
+        <li>Q<sub>r</sub>, κ, the thermal noise and the filter bandwidth were chosen so that the results are close to typical textbook values (for example, PIN sensitivity about −19.5 dBm at 10 Gb/s).</li>
+        <li>The random noise uses a fixed seed, so the same settings always give the same numbers.</li>
+      </ul>
+
+      <h3>7. Components in this program</h3>
+      <div class="tbl" id="comp-list"></div>
+
+      <h3>8. Sources of the equations</h3>
+      <ol class="refs">
+        <li>G. Keiser, <i>Fiber Span Communications</i>, McGraw-Hill: attenuation, dispersion, LED spectral width and response, photodetectors, receiver noise, Q and BER.</li>
+        <li>G. P. Agrawal, <i>Fiber-Optic Communication Systems</i>, Wiley: dispersion transfer function, chirp, external modulators, optical amplifiers, receiver sensitivity.</li>
+        <li>R. Ramaswami, K. N. Sivarajan, G. H. Sasaki, <i>Optical Networks: A Practical Perspective</i>, Morgan Kaufmann: OSNR rule (58 dB).</li>
+        <li>E. Desurvire, <i>Erbium-Doped Fiber Amplifiers: Principles and Applications</i>, Wiley, 1994: ASE noise and noise figure.</li>
+        <li>L. A. Coldren, S. W. Corzine, <i>Diode Lasers and Photonic Integrated Circuits</i>, Wiley: laser modulation response.</li>
+        <li>C. H. Henry, "Theory of the linewidth of semiconductor lasers," <i>IEEE J. Quantum Electron.</i>, 1982: the α factor.</li>
+        <li>T. L. Koch and R. A. Linke, "Effect of nonlinear gain reduction on semiconductor laser wavelength chirping," <i>Appl. Phys. Lett.</i>, 1986: transient and adiabatic chirp.</li>
+        <li>R. J. McIntyre, "Multiplication noise in uniform avalanche diodes," <i>IEEE Trans. Electron Devices</i>, 1966: APD excess noise factor.</li>
+        <li>S. D. Personick, "Receiver design for digital fiber optic communication systems," <i>Bell Syst. Tech. J.</i>, 1973: Q factor and BER.</li>
+        <li>ITU-T Recommendation G.652: characteristics of standard single-mode fiber (dispersion formula and typical loss).</li>
+      </ol>
+    </details>
+  </section>
+

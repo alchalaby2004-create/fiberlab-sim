@@ -1,0 +1,20 @@
+/* Mach–Zehnder Modulator — external modulator, chirp-free (balanced drive). */
+OL.register({
+  type: "mzm", name: "External Modulator (MZ)", short: "Ext. Modulator", category: "Transmitters",
+  doc: "External (indirect) modulator, balanced drive at quadrature: E_out = E_in·cos[π/2·(½ − a(v − ½))], a set by the extinction ratio. No chirp.",
+  help: {"eq": [{"t": "Output field", "tex": "E_{\\mathrm{out}}(t)=E_{\\mathrm{in}}(t)\\cos\\!\\left[\\frac{\\pi}{2}\\left(\\frac{1}{2}-a\\left(v-\\frac{1}{2}\\right)\\right)\\right]10^{-IL/20}", "n": "v is the drive (0 to 1). The modulator is biased at the half-power point, so the average output power is half the input whatever the ER. Balanced (push-pull) drive: no phase change, so no chirp."}, {"t": "Drive swing from the extinction ratio", "tex": "a=1-\\frac{4}{\\pi}\\arctan\\frac{1}{\\sqrt{ER}}", "n": "ER is the extinction ratio (linear). a = 1 gives a perfect 0 level; a smaller swing gives a brighter 0 and a dimmer 1."}, {"t": "Power penalty of a finite extinction ratio", "tex": "\\delta_{ER}=10\\log_{10}\\frac{ER+1}{ER-1}\\ \\ \\mathrm{dB}", "n": "For ER = 20 dB the penalty is about 0.1 dB; for 6 dB it is about 2.2 dB."}], "params": {"er": "Higher ER → the 0 level is darker and the 1 level brighter (same average power) → larger eye opening and higher Q (smaller penalty δ).", "il": "Insertion loss lowers the whole signal by IL dB.", "bw": "The modulator bandwidth limits how fast the light can change. Low values round the pulses (ISI)."}, "extra": "", "src": ["agrawal", "keiser"], "ar": {"doc": "معدِّل خارجي (غير مباشر) بدفع متوازن عند نقطة نصف القدرة: E_out = E_in·cos[π/2·(½ − a(v − ½))]، و a تحددها نسبة الإطفاء. بلا chirp.", "eq": [{"t": "المجال الخارج", "n": "v هي إشارة الدفع (من 0 إلى 1). المعدِّل منحاز عند نقطة نصف القدرة، فتبقى القدرة المتوسطة نصف قدرة الدخل مهما كانت ER. دفع متوازن (push-pull): لا تغيّر في الطور، فلا يوجد chirp."}, {"t": "سعة الدفع من نسبة الإطفاء", "n": "ER نسبة الإطفاء (خطية). a = 1 تعطي مستوى 0 مثالياً، وسعة أصغر تعطي 0 أكثر سطوعاً و 1 أقل سطوعاً."}, {"t": "عقوبة القدرة بسبب نسبة إطفاء محدودة", "n": "عند ER = 20 dB العقوبة حوالي 0.1 dB، وعند 6 dB حوالي 2.2 dB."}], "params": {"er": "ER أعلى ← مستوى 0 أكثر عتمة ومستوى 1 أكثر سطوعاً (بنفس القدرة المتوسطة) ← فتحة عين أكبر و Q أعلى (عقوبة δ أصغر).", "il": "خسارة الإدخال تخفض الإشارة كلها بمقدار IL dB.", "bw": "عرض نطاق المعدِّل يحدد سرعة تغيّر الضوء. القيم المنخفضة تدوّر النبضات (ISI)."}, "extra": ""}},
+  inputs: [{ id: "opt", kind: "opt", label: "Carrier" }, { id: "mod", kind: "elec", label: "Modulation" }], outputs: [{ id: "out", kind: "opt", label: "Optical" }],
+  params: [{ key: "er", label: "Extinction ratio", unit: "dB", type: "number", def: 20, min: 5, max: 40, step: 1 },
+    { key: "il", label: "Insertion loss", unit: "dB", type: "number", def: 0, min: 0, max: 10, step: 0.5 },
+    { key: "bw", label: "Modulator bandwidth", unit: "GHz", type: "number", def: 35, min: 1, max: 100, step: 1 }],
+  icon: '<line x1="4" y1="20" x2="14" y2="20" class="ic-line"/><path d="M14 20 L22 10 L42 10 L50 20 L42 30 L22 30 Z" class="ic-line"/><line x1="50" y1="20" x2="60" y2="20" class="ic-line"/><rect x="26" y="6" width="12" height="8" class="ic-fill"/>',
+  run: function (p, inp, ctx) {
+    var c = inp.opt, m = inp.mod, t = m.t, s = OL.cloneOpt(c); s.t = t;
+    var v = Float64Array.from(m.x), vi = new Float64Array(t.N); OL.filt(v, vi, t.fs, OL.gaussLP(p.bw * 1e9));
+    // balanced (push-pull) MZM biased at quadrature: the drive swing a sets the extinction ratio, the average stays at half the input
+    var a = 1 - 4 / Math.PI * Math.atan(Math.pow(10, -p.er / 20)), il = Math.pow(10, -p.il / 20);
+    for (var i = 0; i < t.N; i++) { var T = Math.cos(Math.PI / 2 * (0.5 - a * (Math.min(Math.max(v[i], 0), 1) - 0.5))) * il; s.re[i] = c.re[i] * T; s.im[i] = c.im[i] * T; }
+    s.rz = m.rz; s.aseS = c.aseS * il * il;
+    return { out: { out: s }, info: { text: "Average output " + OL.fmt(OL.dbm(OL.power(s)), 2) + " dBm" } };
+  }
+});

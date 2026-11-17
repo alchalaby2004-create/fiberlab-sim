@@ -1,0 +1,2812 @@
+<title>FiberLab Sim Help</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F6; --panel:#FFFFFF; --ink:#16233B; --muted:#5B6782; --line:#D3DAE7; --soft:#F6F8FC;
+  --accent:#B0204E; --accent-soft:#F6DCE4; --blue:#2F5D9E; --blue-soft:#E3ECF8;
+  --ok:#1F7A4D; --ok-soft:#DDF1E5; --warn:#A86200; --warn-soft:#FBEBD2; --bad:#B0204E; --bad-soft:#F6DCE4;
+  --canvas:#FBFCFE; --grid:#E3E8F1; --node:#FFFFFF; --node-line:#9AA8C2; --icon:#2A3A5C; --icon-fill:#D9E3F3;
+  --k-opt:#C2185B; --k-elec:#1E63C4; --k-bin:#6B7280; --sel:#F2A900;
+  --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1120; --panel:#141C30; --ink:#E7ECF6; --muted:#9AA6C0; --line:#28344F; --soft:#1A2338;
+  --accent:#F27A98; --accent-soft:#3A1E2B; --blue:#8DB4F0; --blue-soft:#1A2846;
+  --ok:#6FD19B; --ok-soft:#14321F; --warn:#F2B35A; --warn-soft:#3A2A10; --bad:#F27A98; --bad-soft:#3A1E2B;
+  --canvas:#0E1628; --grid:#1B2640; --node:#18223A; --node-line:#4A5A7C; --icon:#C9D6EE; --icon-fill:#2A3A5C;
+  --k-opt:#FF6F9C; --k-elec:#6FA8FF; --k-bin:#9AA3B5; --sel:#FFC94D; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1120; --panel:#141C30; --ink:#E7ECF6; --muted:#9AA6C0; --line:#28344F; --soft:#1A2338;
+  --accent:#F27A98; --accent-soft:#3A1E2B; --blue:#8DB4F0; --blue-soft:#1A2846;
+  --ok:#6FD19B; --ok-soft:#14321F; --warn:#F2B35A; --warn-soft:#3A2A10; --bad:#F27A98; --bad-soft:#3A1E2B;
+  --canvas:#0E1628; --grid:#1B2640; --node:#18223A; --node-line:#4A5A7C; --icon:#C9D6EE; --icon-fill:#2A3A5C;
+  --k-opt:#FF6F9C; --k-elec:#6FA8FF; --k-bin:#9AA3B5; --sel:#FFC94D; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.55;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:14px 60px}
+.page{max-width:900px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 12px;font:600 .84rem var(--sans);cursor:pointer}
+h1{font-size:1.6rem;margin:28px 0 10px;text-wrap:balance} h1:first-child{margin-top:4px}
+h2{font-size:1.2rem;color:var(--accent);margin:28px 0 8px;border-bottom:1px solid var(--line);padding-bottom:4px}
+h3{font-size:1.05rem;color:var(--blue);margin:24px 0 6px}
+p,li{max-width:72ch}
+nav#TOC{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:10px 0 20px;font-size:.92rem}
+nav#TOC ul{margin:4px 0;padding-left:1.2em} nav#TOC a{color:var(--blue);text-decoration:none}
+.tw{overflow-x:auto} table{border-collapse:collapse;width:100%;font-size:.88rem;margin:8px 0 14px}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top} th{background:var(--blue-soft)}
+math[display="block"]{display:block;overflow-x:auto;overflow-y:hidden;padding:8px 0;font-size:1.12em}
+code{font-family:var(--mono)}
+a{color:var(--blue)}
+#ar{font-family:"Noto Naskh Arabic",var(--sans);font-size:1.04em} #ar th,#ar td{text-align:right} #ar td:nth-child(1),#ar td:nth-child(2){direction:ltr;unicode-bidi:plaintext} #ar math{direction:ltr} #ar nav#TOC ul{padding-left:0;padding-right:1.2em}
+</style>
+<div class="page">
+<div class="top"><b>FiberLab Sim · Help <span style="font-weight:400;color:var(--muted);font-size:.85em">· By: Dr. Ahmed A. Al-Chalaby · Version 1.20 beta</span></b><span><button class="btn" id="langBtn" type="button" lang="ar">عربي</button> <button class="btn" id="themeBtn" type="button">Theme</button></span></div>
+<div id="en" lang="en" dir="ltr"><nav aria-label="Contents" id="en-TOC" role="doc-toc">
+<ul>
+<li><a href="#en-fiberlab-sim-help"
+id="en-toc-fiberlab-sim-help">FiberLab Sim — Help</a>
+<ul>
+<li><a href="#en-how-to-use-the-program"
+id="en-toc-how-to-use-the-program">1. How to use the program</a></li>
+<li><a href="#en-signals-on-the-wires"
+id="en-toc-signals-on-the-wires">2. Signals on the wires</a></li>
+<li><a href="#en-reading-the-results" id="en-toc-reading-the-results">3.
+Reading the results</a></li>
+<li><a href="#en-limits-of-the-model" id="en-toc-limits-of-the-model">4.
+Limits of the model</a></li>
+</ul></li>
+<li><a href="#en-component-reference"
+id="en-toc-component-reference">Component reference</a>
+<ul>
+<li><a href="#en-transmitters" id="en-toc-transmitters">5.
+Transmitters</a></li>
+<li><a href="#en-optical-fibers" id="en-toc-optical-fibers">6. Optical
+fibers</a></li>
+<li><a href="#en-amplifiers-and-passive"
+id="en-toc-amplifiers-and-passive">7. Amplifiers and passive</a></li>
+<li><a href="#en-receivers" id="en-toc-receivers">8. Receivers</a></li>
+<li><a href="#en-visualizers" id="en-toc-visualizers">9.
+Visualizers</a></li>
+</ul></li>
+<li><a href="#en-sources" id="en-toc-sources">Sources</a></li>
+</ul>
+</nav>
+
+
+<h1 id="en-fiberlab-sim-help">FiberLab Sim — Help</h1>
+<p><em>By: Dr. Ahmed A. Al-Chalaby · Version 1.20 beta</em></p>
+<p>FiberLab Sim is a teaching program for designing and simulating
+optical fiber links. Components are placed on a drawing area and joined
+with links, as in commercial optical-system simulators. It runs in a web
+browser. This help explains how to use the program and, for every
+component, the governing equations, how each setting changes the result,
+and the sources of the equations.</p>
+<h2 id="en-how-to-use-the-program">1. How to use the program</h2>
+<ol type="1">
+<li><strong>Choose an experiment</strong> from the list at the top:
+<em>Free design</em>, a <em>Tutorial</em> (ready layout, for learning)
+or an <em>Assignment</em> (build it yourself, personal values from your
+full name, graded).</li>
+<li><strong>Add components.</strong> Drag a component from the library
+(left) onto the layout. On a phone, tap it.</li>
+<li><strong>Connect.</strong> Drag from an output port (right side of a
+block) to an input port (left side). Ports and wires have colors:
+optical (red), electrical (blue), binary (grey, dashed). Only ports of
+the same kind can be connected. One output can feed several inputs (for
+example a fiber and a power meter).</li>
+<li><strong>Set the components.</strong> Select a block to see its
+settings on the right. Press <strong>?</strong> (Help) to see its
+equations.</li>
+<li><strong>Press ▶ Run.</strong> The program runs the components in the
+order of the wires. Results appear above the visualizers and in the
+<em>Results</em> area.</li>
+<li><strong>Open a visualizer</strong> (double-click, or <em>Open
+graphs</em>) to see its graphs: eye diagram, Q against sampling time,
+spectrum, signal in time.</li>
+<li><strong>Sweep.</strong> Change one setting step by step and measure
+one result (for example Q against fiber length). Copy the table into
+Word or Excel.</li>
+<li><strong>Global settings</strong> set the bit rate (up to 40 Gb/s),
+the sequence length (8 to 1024 bits) and the samples per bit (8 to 512)
+for the whole layout. Use many samples per bit only for short sequences
+(for example laser chirp studies).</li>
+<li><strong>Export</strong> saves the layout as a file (.json);
+<strong>Import</strong> opens a layout file (you can also drop the file
+on the layout).</li>
+<li><strong>Send result</strong> (assignments only, after Run): write
+your name and section; the program makes a short report with a
+verification code (your layout and results) and opens your instructor’s
+form, or lets you copy the report. The first time, paste the
+<strong>class code</strong> (starts with OSC1.) that your instructor
+gives you. Do not edit the code: the instructor’s grader calculates your
+layout again to check it.</li>
+</ol>
+<p>To remove a block or a wire, select it and press <em>Delete</em> (or
+the <em>Delete</em> button). <em>Reset lab</em> returns to the starting
+layout of the experiment.</p>
+<h2 id="en-signals-on-the-wires">2. Signals on the wires</h2>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Wire</th>
+<th>Carries</th>
+<th>Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Binary</td>
+<td>the bit sequence and the time base (bit rate, samples per bit)</td>
+<td>bits</td>
+</tr>
+<tr class="even">
+<td>Electrical</td>
+<td>drive signal (0 to 1) or photocurrent</td>
+<td>A</td>
+</tr>
+<tr class="odd">
+<td>Optical</td>
+<td>complex optical field, wavelength, spectral width, ASE noise
+level</td>
+<td>√W</td>
+</tr>
+</tbody>
+</table></div>
+<p>The photodetector gives the clean current. Its shot and thermal noise
+are added by the low-pass filter after it, for the noise bandwidth of
+that filter. If no filter is used, the Eye &amp; BER Meter adds the
+noise over the full simulation bandwidth (and shows a warning).</p>
+<h2 id="en-reading-the-results">3. Reading the results</h2>
+<div class="tw"><table>
+<thead>
+<tr class="header">
+<th>Q</th>
+<th>BER</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Q ≥ 6</td>
+<td>≤ 10⁻⁹</td>
+<td>Works (green)</td>
+</tr>
+<tr class="even">
+<td>4.75 to 6</td>
+<td>10⁻⁶ to 10⁻⁹</td>
+<td>Marginal: needs error correction (yellow)</td>
+</tr>
+<tr class="odd">
+<td>Q &lt; 4.75</td>
+<td>&gt; 10⁻⁶</td>
+<td>Fails (red)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="en-limits-of-the-model">4. Limits of the model</h2>
+<ul>
+<li>No fiber nonlinear effects (SPM, XPM, FWM), no PMD and no
+polarization effects.</li>
+<li>LED and Fabry–Pérot lasers are treated as incoherent sources:
+dispersion spreads their intensity.</li>
+<li>The Rate-Equation Laser has no laser noise (no relative intensity
+noise, no phase noise).</li>
+<li>Q is measured on 512 bits with a Gaussian-noise assumption; very
+small BER values are calculated from Q, not counted.</li>
+<li>Some values (laser damping, adiabatic chirp, thermal noise, filter
+bandwidth) were chosen so that results are close to typical textbook
+values.</li>
+<li>The noise uses a fixed seed: the same layout and settings always
+give the same numbers.</li>
+</ul>
+<h1 id="en-component-reference">Component reference</h1>
+<h2 id="en-transmitters">5. Transmitters</h2>
+<h3 id="en-dfb-laser-cw">5.1 DFB Laser (CW)</h3>
+<p>Continuous-wave single-mode (DFB) laser. Narrow spectrum, constant
+power.</p>
+<p><em>Ports:</em> out: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Output field</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msqrt><msub><mi>P</mi><mrow><mi mathvariant="normal">C</mi><mi mathvariant="normal">W</mi></mrow></msub></msqrt><mo>,</mo><mspace width="2.0em"></mspace><mi>ν</mi><mo>=</mo><mfrac><mi>c</mi><mi>λ</mi></mfrac></mrow><annotation encoding="application/x-tex">E(t)=\sqrt{P_{\mathrm{CW}}},\qquad \nu=\frac{c}{\lambda}</annotation></semantics></math></p>
+<p>A single-mode (DFB) laser that stays on. Its linewidth is taken as
+zero (much smaller than the signal).</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Power (dBm)</td>
+<td>3 dBm</td>
+<td>Sets the carrier power. After a Mach–Zehnder modulator the average
+power is about 3 dB lower (half of the time the light is switched
+off).</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>1550 nm</td>
+<td>Sets the fiber loss and dispersion (automatic values), the
+photodiode responsivity R ∝ λ, and the photon energy hν used for the
+amplifier noise.</td>
+</tr>
+<tr class="odd">
+<td>Linewidth (MHz)</td>
+<td>0 MHz</td>
+<td>Laser linewidth Δν (phase noise, a random walk of the phase). It
+widens the carrier line in the spectrum. 0 = ideal laser (used in the
+tutorials and assignments); a typical DFB laser has about 1–10 MHz.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="en-direct-modulation-laser">5.2 Direct-Modulation Laser</h3>
+<p>DFB laser modulated by its current. Second-order response (fr) and
+chirp Δν = α/4π·d(lnP)/dt + κ(P − P̄).</p>
+<p><em>Ports:</em> in: Drive (electrical); out: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Power levels</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>1</mn></msub><mo>=</mo><mfrac><mover><mi>P</mi><mo accent="true">¯</mo></mover><mrow><mi>m</mi><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>E</mi><mi>R</mi></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>P</mi><mn>0</mn></msub><mo>=</mo><mfrac><msub><mi>P</mi><mn>1</mn></msub><mrow><mi>E</mi><mi>R</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">P_1=\frac{\overline{P}}{m+(1-m)/ER},\qquad P_0=\frac{P_1}{ER}</annotation></semantics></math></p>
+<p>m = 0.5 for NRZ (half of the bits are 1).</p>
+<p><em>Laser modulation response</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mi>/</mi><msub><mi>f</mi><mi>r</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>j</mi><mspace width="0.167em"></mspace><mfrac displaystyle="true"><mrow><mi>f</mi><mi>/</mi><msub><mi>f</mi><mi>r</mi></msub></mrow><msub><mi>Q</mi><mi>r</mi></msub></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">H(f)=\frac{1}{1-\left(f/f_r\right)^{2}+j\,\dfrac{f/f_r}{Q_r}}</annotation></semantics></math></p>
+<p>Second-order response from the rate equations: resonance at fᵣ,
+damping Qᵣ.</p>
+<p><em>Frequency chirp</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>ν</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mi>α</mi><mrow><mn>4</mn><mi>π</mi></mrow></mfrac><mspace width="0.167em"></mspace><mfrac><mrow><mi>d</mi><mo>ln</mo><mi>P</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>+</mo><mi>κ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo>−</mo><mover><mi>P</mi><mo accent="true">¯</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta\nu(t)=\frac{\alpha}{4\pi}\,\frac{d\ln P}{dt}+\kappa\left(P-\overline{P}\right)</annotation></semantics></math></p>
+<p>Transient chirp (α) at the edges, and adiabatic chirp (κ): 1s and 0s
+have different frequencies.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Average power (dBm)</td>
+<td>0 dBm</td>
+<td>Average launch power P̄.</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>1550 nm</td>
+<td>At 1550 nm (D ≈ 17 ps/(nm·km)) chirp turns into strong pulse
+spreading; at 1310 nm (D ≈ 0) chirp does little.</td>
+</tr>
+<tr class="odd">
+<td>Extinction ratio (dB)</td>
+<td>6 dB</td>
+<td>Low ER (typical 4–8 dB for a DML) → small eye opening. A higher ER
+means a lower P₀ and stronger chirp in real lasers.</td>
+</tr>
+<tr class="even">
+<td>Chirp factor α</td>
+<td>5</td>
+<td>α = 0 → no transient chirp. Larger α → wider spectrum → much more
+dispersion penalty after fiber at 1550 nm.</td>
+</tr>
+<tr class="odd">
+<td>Adiabatic chirp κ (GHz/mW)</td>
+<td>2 GHz/mW</td>
+<td>Adiabatic chirp: the 1s and 0s are at different frequencies, so
+after dispersion they arrive at different times.</td>
+</tr>
+<tr class="even">
+<td>Resonance frequency fr (GHz)</td>
+<td>12 GHz</td>
+<td>Higher fᵣ → faster laser. If fᵣ is close to the bit rate, the eye
+shows ringing and closes.</td>
+</tr>
+<tr class="odd">
+<td>Resonance damping Qr</td>
+<td>1.6</td>
+<td>Higher Qᵣ → less damping → more overshoot and ringing.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> L. A. Coldren, S. W. Corzine, Diode Lasers
+and Photonic Integrated Circuits, Wiley. C. H. Henry, “Theory of the
+linewidth of semiconductor lasers,” IEEE J. Quantum Electron., 1982. T.
+L. Koch, R. A. Linke, “Effect of nonlinear gain reduction on
+semiconductor laser wavelength chirping,” Appl. Phys. Lett., 1986. G. P.
+Agrawal, Fiber-Optic Communication Systems, Wiley.</p>
+<h3 id="en-multimode-fp-laser">5.3 Multimode FP Laser</h3>
+<p>Multimode laser. Several modes inside a width Δλ (1–5 nm), so
+dispersion is large.</p>
+<p><em>Ports:</em> in: Drive (electrical); out: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Mode spacing of the cavity</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><msub><mi>λ</mi><mi>m</mi></msub><mo>=</mo><mfrac><msup><mi>λ</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>n</mi><msub><mi>L</mi><mi>c</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Delta\lambda_{m}=\frac{\lambda^{2}}{2nL_c}</annotation></semantics></math></p>
+<p>Several modes lie inside the spectral width Δλ.</p>
+<p><em>Pulse spreading in the fiber</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>τ</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>D</mi><mo stretchy="true" form="postfix">|</mo></mrow><mspace width="0.167em"></mspace><mi>L</mi><mspace width="0.167em"></mspace><mi>Δ</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">\Delta\tau=|D|\,L\,\Delta\lambda</annotation></semantics></math></p>
+<p>The FP laser is treated as an incoherent source with width Δλ.</p>
+<p><em>Modulation response</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mi>/</mi><msub><mi>f</mi><mi>r</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>j</mi><mspace width="0.167em"></mspace><mfrac displaystyle="true"><mrow><mi>f</mi><mi>/</mi><msub><mi>f</mi><mi>r</mi></msub></mrow><mn>1.6</mn></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">H(f)=\frac{1}{1-\left(f/f_r\right)^{2}+j\,\dfrac{f/f_r}{1.6}}</annotation></semantics></math></p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Average power (dBm)</td>
+<td>0 dBm</td>
+<td>Average launch power.</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>1310 nm</td>
+<td>Choose 1310 nm (D ≈ 0) to avoid the dispersion problem of the wide
+spectrum.</td>
+</tr>
+<tr class="odd">
+<td>Extinction ratio (dB)</td>
+<td>6 dB</td>
+<td>Extinction ratio of the direct modulation.</td>
+</tr>
+<tr class="even">
+<td>Spectral width (FWHM) (nm)</td>
+<td>2 nm</td>
+<td>Wider spectrum → more pulse spreading Δτ = |D|LΔλ → shorter maximum
+length.</td>
+</tr>
+<tr class="odd">
+<td>Mode spacing (nm)</td>
+<td>0.6 nm</td>
+<td>Only changes the drawing on the spectrum monitor (the modes).</td>
+</tr>
+<tr class="even">
+<td>Resonance frequency fr (GHz)</td>
+<td>12 GHz</td>
+<td>Resonance frequency: limits the speed of the laser.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill. G. P. Agrawal, Fiber-Optic Communication Systems,
+Wiley.</p>
+<h3 id="en-optical-gaussian-pulse-source">5.4 Optical Gaussian Pulse
+Source</h3>
+<p>Each 1 bit gives a Gaussian pulse E(t) = √P₀·exp[−(1 + jC)t²/(2T₀²)],
+T₀ = T_FWHM/1.665, centred in the bit.</p>
+<p><em>Ports:</em> in: Bits (binary); out: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Chirped Gaussian pulse</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msqrt><msub><mi>P</mi><mn>0</mn></msub></msqrt><mspace width="0.167em"></mspace><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>j</mi><mi>C</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msup><mi>t</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><msubsup><mi>T</mi><mn>0</mn><mn>2</mn></msubsup></mrow></mfrac><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>T</mi><mrow><mi mathvariant="normal">F</mi><mi mathvariant="normal">W</mi><mi mathvariant="normal">H</mi><mi mathvariant="normal">M</mi></mrow></msub><mo>=</mo><mn>2</mn><msqrt><mrow><mo>ln</mo><mn>2</mn></mrow></msqrt><mspace width="0.167em"></mspace><msub><mi>T</mi><mn>0</mn></msub><mo>≈</mo><mn>1.665</mn><mspace width="0.167em"></mspace><msub><mi>T</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">E(0,t)=\sqrt{P_0}\,\exp\!\left[-\frac{(1+jC)\,t^{2}}{2T_0^{2}}\right],\qquad T_{\mathrm{FWHM}}=2\sqrt{\ln 2}\,T_0\approx1.665\,T_0</annotation></semantics></math></p>
+<p>One pulse in the middle of every 1 bit. C &gt; 0: the frequency rises
+from the leading to the trailing edge.</p>
+<p><em>Dispersion length</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>D</mi></msub><mo>=</mo><mfrac><msubsup><mi>T</mi><mn>0</mn><mn>2</mn></msubsup><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>β</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>β</mi><mn>2</mn></msub><mo>=</mo><mo>−</mo><mfrac><mrow><mi>D</mi><msup><mi>λ</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>π</mi><mi>c</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">L_D=\frac{T_0^{2}}{|\beta_2|},\qquad \beta_2=-\frac{D\lambda^{2}}{2\pi c}</annotation></semantics></math></p>
+<p>For SMF at 1550 nm, D ≈ 16 ps/(nm·km) gives β₂ ≈ −20 ps²/km.</p>
+<p><em>Pulse width after a length z</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>T</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msub><mi>T</mi><mn>0</mn></msub></mfrac><mo>=</mo><msqrt><mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mfrac><mrow><mi>C</mi><msub><mi>β</mi><mn>2</mn></msub><mi>z</mi></mrow><msubsup><mi>T</mi><mn>0</mn><mn>2</mn></msubsup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mi>β</mi><mn>2</mn></msub><mi>z</mi></mrow><msubsup><mi>T</mi><mn>0</mn><mn>2</mn></msubsup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">\frac{T(z)}{T_0}=\sqrt{\left(1+\frac{C\beta_2 z}{T_0^{2}}\right)^{2}+\left(\frac{\beta_2 z}{T_0^{2}}\right)^{2}}</annotation></semantics></math></p>
+<p>C = 0: the width grows by √2 at z = L(D) and the peak power falls by
+√2. When C·β₂ &lt; 0 the pulse first gets shorter.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Peak power (dBm)</td>
+<td>0 dBm</td>
+<td>Peak power of each pulse.</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>1550 nm</td>
+<td>Carrier wavelength (sets D of the fiber in auto mode).</td>
+</tr>
+<tr class="odd">
+<td>Pulse width (FWHM) (× bit period)</td>
+<td>0.5 × bit period</td>
+<td>FWHM as a part of the bit period. A shorter pulse has a wider
+spectrum, so it spreads faster (L(D) ∝ T₀²).</td>
+</tr>
+<tr class="even">
+<td>Initial chirp C</td>
+<td>0</td>
+<td>Initial linear chirp C. In normal SMF at 1550 nm (β₂ &lt; 0) a
+positive C compresses the pulse first; a negative C makes it spread
+faster.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use Bit Source › Pattern = Single 1 to look at one isolated
+pulse.</p>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h3 id="en-led">5.5 LED</h3>
+<p>Light-emitting diode. Slow (carrier lifetime τ) and wide spectrum: Δλ
+≈ 1.45·λ²·kT.</p>
+<p><em>Ports:</em> in: Drive (electrical); out: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Spectral width</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>λ</mi><mo>≈</mo><mn>1.45</mn><mspace width="0.167em"></mspace><msup><mi>λ</mi><mn>2</mn></msup><mspace width="0.167em"></mspace><mi>k</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">\Delta\lambda\approx 1.45\,\lambda^{2}\,kT</annotation></semantics></math></p>
+<p>λ in µm and kT in eV give Δλ in µm (kT = 0.0259 eV at 300 K).</p>
+<p><em>Modulation response and bandwidth</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>j</mi><mn>2</mn><mi>π</mi><mi>f</mi><mi>τ</mi></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>f</mi><mrow><mn>3</mn><mspace width="0.167em"></mspace><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mi>π</mi><mi>τ</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">H(f)=\frac{1}{1+j2\pi f\tau},\qquad f_{3\,\mathrm{dB}}=\frac{1}{2\pi\tau}</annotation></semantics></math></p>
+<p>τ is the carrier lifetime.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Average power (dBm)</td>
+<td>-15 dBm</td>
+<td>Average power coupled into the fiber (LEDs give little power, about
+−20 to −10 dBm).</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>850 nm</td>
+<td>Δλ grows with λ²: about 27 nm at 850 nm and 60 nm at 1310 nm.</td>
+</tr>
+<tr class="odd">
+<td>Extinction ratio (dB)</td>
+<td>6 dB</td>
+<td>Extinction ratio.</td>
+</tr>
+<tr class="even">
+<td>Carrier lifetime τ (ns)</td>
+<td>2 ns</td>
+<td>Longer τ → lower bandwidth (2 ns → 80 MHz). The LED cannot follow
+fast bits.</td>
+</tr>
+<tr class="odd">
+<td>Temperature (K)</td>
+<td>300 K</td>
+<td>Higher temperature → wider spectrum (Δλ ∝ kT).</td>
+</tr>
+<tr class="even">
+<td>Spectral width (FWHM) (nm)</td>
+<td>Auto</td>
+<td>Auto: Δλ from the formula above. Set a value to use the width given
+in a datasheet (real LEDs are about 30 to 180 nm).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="en-external-modulator-mz">5.6 External Modulator (MZ)</h3>
+<p>External (indirect) modulator, balanced drive at quadrature: E_out =
+E_in·cos[π/2·(½ − a(v − ½))], a set by the extinction ratio. No
+chirp.</p>
+<p><em>Ports:</em> in: Carrier (optical); in: Modulation (electrical);
+out: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Output field</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>E</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>cos</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>−</mo><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>v</mi><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><msup><mn>10</mn><mrow><mo>−</mo><mi>I</mi><mi>L</mi><mi>/</mi><mn>20</mn></mrow></msup></mrow><annotation encoding="application/x-tex">E_{\mathrm{out}}(t)=E_{\mathrm{in}}(t)\cos\!\left[\frac{\pi}{2}\left(\frac{1}{2}-a\left(v-\frac{1}{2}\right)\right)\right]10^{-IL/20}</annotation></semantics></math></p>
+<p>v is the drive (0 to 1). The modulator is biased at the half-power
+point, so the average output power is half the input whatever the ER.
+Balanced (push-pull) drive: no phase change, so no chirp.</p>
+<p><em>Drive swing from the extinction ratio</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>4</mn><mi>π</mi></mfrac><mo>arctan</mo><mfrac><mn>1</mn><msqrt><mrow><mi>E</mi><mi>R</mi></mrow></msqrt></mfrac></mrow><annotation encoding="application/x-tex">a=1-\frac{4}{\pi}\arctan\frac{1}{\sqrt{ER}}</annotation></semantics></math></p>
+<p>ER is the extinction ratio (linear). a = 1 gives a perfect 0 level; a
+smaller swing gives a brighter 0 and a dimmer 1.</p>
+<p><em>Power penalty of a finite extinction ratio</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mrow><mi>E</mi><mi>R</mi></mrow></msub><mo>=</mo><mn>10</mn><msub><mo>log</mo><mn>10</mn></msub><mfrac><mrow><mi>E</mi><mi>R</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>E</mi><mi>R</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow></mrow><annotation encoding="application/x-tex">\delta_{ER}=10\log_{10}\frac{ER+1}{ER-1}\ \ \mathrm{dB}</annotation></semantics></math></p>
+<p>For ER = 20 dB the penalty is about 0.1 dB; for 6 dB it is about 2.2
+dB.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Extinction ratio (dB)</td>
+<td>20 dB</td>
+<td>Higher ER → the 0 level is darker and the 1 level brighter (same
+average power) → larger eye opening and higher Q (smaller penalty
+δ).</td>
+</tr>
+<tr class="even">
+<td>Insertion loss (dB)</td>
+<td>0 dB</td>
+<td>Insertion loss lowers the whole signal by IL dB.</td>
+</tr>
+<tr class="odd">
+<td>Modulator bandwidth (GHz)</td>
+<td>35 GHz</td>
+<td>The modulator bandwidth limits how fast the light can change. Low
+values round the pulses (ISI).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="en-nrz-line-coder">5.7 NRZ Line Coder</h3>
+<p>Non-return-to-zero pulses. The rise time is set by a Gaussian
+low-pass shape.</p>
+<p><em>Ports:</em> in: Bits (binary); out: Drive (electrical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>NRZ signal</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mi>k</mi></munder><msub><mi>a</mi><mi>k</mi></msub><mspace width="0.167em"></mspace><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>k</mi><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>a</mi><mi>k</mi></msub><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">v(t)=\sum_{k} a_k\,p(t-kT),\qquad a_k\in\{0,1\}</annotation></semantics></math></p>
+<p>p(t) is a rectangular pulse of width T (the whole bit).</p>
+<p><em>Driver (rise-time) filter</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mfrac><mrow><mo>ln</mo><mn>2</mn></mrow><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>f</mi><msub><mi>f</mi><mi>d</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>f</mi><mi>d</mi></msub><mo>=</mo><mrow><mi mathvariant="normal">b</mi><mi mathvariant="normal">w</mi></mrow><mo>⋅</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">H(f)=\exp\!\left[-\frac{\ln 2}{2}\left(\frac{f}{f_d}\right)^{2}\right],\qquad f_d=\mathrm{bw}\cdot B</annotation></semantics></math></p>
+<p>f(d) is the −3 dB bandwidth of the driver.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Driver bandwidth (× bit rate)</td>
+<td>0.8 × bit rate</td>
+<td>Smaller value → slower edges (longer rise time), the bits run into
+each other (ISI) and the eye closes. Larger value → sharp edges but a
+wider spectrum.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="en-bit-source-prbs">5.8 Bit Source (PRBS)</h3>
+<p>Makes a pseudo-random sequence of 0s and 1s at the global bit
+rate.</p>
+<p><em>Ports:</em> out: Bits (binary).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Generator polynomial (order 9)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>9</mn></msup><mo>+</mo><msup><mi>x</mi><mn>5</mn></msup><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">x^{9}+x^{5}+1</annotation></semantics></math></p>
+<p>A shift register with feedback makes the bits. The pattern repeats
+after 2ⁿ − 1 bits.</p>
+<p><em>Pattern length and bit period</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mrow><mi mathvariant="normal">P</mi><mi mathvariant="normal">R</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn><mo>,</mo><mspace width="2.0em"></mspace><mi>T</mi><mo>=</mo><mfrac><mn>1</mn><mi>B</mi></mfrac></mrow><annotation encoding="application/x-tex">L_{\mathrm{PRBS}}=2^{n}-1,\qquad T=\frac{1}{B}</annotation></semantics></math></p>
+<p>B is the bit rate (Global settings).</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PRBS order (2ⁿ−1)</td>
+<td>9</td>
+<td>A higher order gives a longer pattern with longer runs of 1s and 0s
+(up to n in a row). Long runs test the low-frequency response of the
+receiver. With 512 bits, order 9 (511 bits) fits once.</td>
+</tr>
+<tr class="even">
+<td>Pattern</td>
+<td>Pseudo-random (PRBS)</td>
+<td>Pseudo-random for normal links. Single 1 gives one isolated pulse
+(for pulse spreading or laser turn-on studies). Alternating gives 1010…,
+the fastest pattern.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The bit rate B is a layout parameter. A higher B makes each bit
+shorter (T = 1/B), so dispersion closes the eye sooner and the receiver
+needs a wider bandwidth (more noise).</p>
+<p><strong>Sources:</strong> ITU-T Recommendation O.150: Test patterns
+(PRBS) for digital transmission equipment. G. P. Agrawal, Fiber-Optic
+Communication Systems, Wiley.</p>
+<h3 id="en-rate-equation-laser">5.9 Rate-Equation Laser</h3>
+<p>Current I(t) = I_bias + I_mod·v(t) drives the carrier (N) and photon
+(S) rate equations. Shows threshold, turn-on delay, relaxation
+oscillations and chirp.</p>
+<p><em>Ports:</em> in: Drive (electrical); out: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Carrier rate equation</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>N</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>q</mi><mi>V</mi></mrow></mfrac><mo>−</mo><mfrac><mi>N</mi><msub><mi>τ</mi><mi>n</mi></msub></mfrac><mo>−</mo><mfrac><mrow><msub><mi>v</mi><mi>g</mi></msub><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>−</mo><msub><mi>N</mi><mrow><mi>t</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mi>ε</mi><mi>S</mi></mrow></mfrac><mspace width="0.167em"></mspace><mi>S</mi></mrow><annotation encoding="application/x-tex">\frac{dN}{dt}=\frac{I(t)}{qV}-\frac{N}{\tau_n}-\frac{v_g a (N-N_{tr})}{1+\varepsilon S}\,S</annotation></semantics></math></p>
+<p>N: carrier density, I = I(bias) + I(mod)·v(t).</p>
+<p><em>Photon rate equation</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>S</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>Γ</mi><mfrac><mrow><msub><mi>v</mi><mi>g</mi></msub><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>−</mo><msub><mi>N</mi><mrow><mi>t</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mi>ε</mi><mi>S</mi></mrow></mfrac><mspace width="0.167em"></mspace><mi>S</mi><mo>−</mo><mfrac><mi>S</mi><msub><mi>τ</mi><mi>p</mi></msub></mfrac><mo>+</mo><mi>Γ</mi><mi>β</mi><mfrac><mi>N</mi><msub><mi>τ</mi><mi>n</mi></msub></mfrac></mrow><annotation encoding="application/x-tex">\frac{dS}{dt}=\Gamma\frac{v_g a (N-N_{tr})}{1+\varepsilon S}\,S-\frac{S}{\tau_p}+\Gamma\beta\frac{N}{\tau_n}</annotation></semantics></math></p>
+<p>S: photon density. The last term is spontaneous emission that starts
+the lasing.</p>
+<p><em>Phase (chirp)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>φ</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mi>α</mi><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">[</mo><mi>Γ</mi><msub><mi>v</mi><mi>g</mi></msub><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>−</mo><msub><mi>N</mi><mrow><mi>t</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mfrac><mn>1</mn><msub><mi>τ</mi><mi>p</mi></msub></mfrac><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\frac{d\varphi}{dt}=\frac{\alpha}{2}\left[\Gamma v_g a (N-N_{tr})-\frac{1}{\tau_p}\right]</annotation></semantics></math></p>
+<p>α turns every change of N into a change of frequency (transient and
+adiabatic chirp).</p>
+<p><em>Threshold and output power</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mrow><mi>t</mi><mi>h</mi></mrow></msub><mo>=</mo><mfrac><mrow><mi>q</mi><mi>V</mi></mrow><msub><mi>τ</mi><mi>n</mi></msub></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>N</mi><mrow><mi>t</mi><mi>r</mi></mrow></msub><mo>+</mo><mfrac><mn>1</mn><mrow><mi>Γ</mi><msub><mi>v</mi><mi>g</mi></msub><mi>a</mi><msub><mi>τ</mi><mi>p</mi></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mi>P</mi><mo>=</mo><mfrac><mrow><mi>η</mi><mspace width="0.167em"></mspace><mi>h</mi><mi>ν</mi><mspace width="0.167em"></mspace><mi>V</mi></mrow><mrow><mn>2</mn><mi>Γ</mi><msub><mi>τ</mi><mi>p</mi></msub></mrow></mfrac><mspace width="0.167em"></mspace><mi>S</mi></mrow><annotation encoding="application/x-tex">I_{th}=\frac{qV}{\tau_n}\left(N_{tr}+\frac{1}{\Gamma v_g a\tau_p}\right),\qquad P=\frac{\eta\,h\nu\,V}{2\Gamma\tau_p}\,S</annotation></semantics></math></p>
+<p>Fixed device values: V = 1.5×10⁻¹⁰ cm³, v(g) = 8.5×10⁹ cm/s, a =
+2.5×10⁻¹⁶ cm², Nₜᵣ = 10¹⁸ cm⁻³, Γ = 0.4, β = 3×10⁻⁵. With the defaults
+Iₜₕ ≈ 33.5 mA.</p>
+<p><em>Turn-on delay (bias below threshold)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mi>d</mi></msub><mo>≈</mo><msub><mi>τ</mi><mi>n</mi></msub><mo>ln</mo><mfrac><msub><mi>I</mi><mrow><mi>m</mi><mi>o</mi><mi>d</mi></mrow></msub><mrow><msub><mi>I</mi><mrow><mi>m</mi><mi>o</mi><mi>d</mi></mrow></msub><mo>+</mo><msub><mi>I</mi><mrow><mi>b</mi><mi>i</mi><mi>a</mi><mi>s</mi></mrow></msub><mo>−</mo><msub><mi>I</mi><mrow><mi>t</mi><mi>h</mi></mrow></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">t_d\approx\tau_n\ln\frac{I_{mod}}{I_{mod}+I_{bias}-I_{th}}</annotation></semantics></math></p>
+<p>Biasing at or above threshold removes the delay.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bias current (mA)</td>
+<td>40 mA</td>
+<td>Bias current. Below Iₜₕ the laser is off between pulses: turn-on
+delay and a strong first spike. Above Iₜₕ the 0 level is not dark (lower
+extinction ratio) and adiabatic chirp appears.</td>
+</tr>
+<tr class="even">
+<td>Modulation peak current (mA)</td>
+<td>20 mA</td>
+<td>Current added for a 1 bit. A larger value gives more power and more
+chirp.</td>
+</tr>
+<tr class="odd">
+<td>Wavelength (nm)</td>
+<td>1550 nm</td>
+<td>Emission wavelength.</td>
+</tr>
+<tr class="even">
+<td>Carrier lifetime τn (ns)</td>
+<td>1 ns</td>
+<td>Carrier lifetime. A longer τn gives a longer turn-on delay (and a
+lower threshold).</td>
+</tr>
+<tr class="odd">
+<td>Photon lifetime τp (ps)</td>
+<td>3 ps</td>
+<td>Photon lifetime. It sets the threshold (shorter τp → higher Iₜₕ) and
+the speed of the relaxation oscillations.</td>
+</tr>
+<tr class="even">
+<td>Linewidth factor α</td>
+<td>5</td>
+<td>Linewidth enhancement factor. α = 0 removes the chirp.</td>
+</tr>
+<tr class="odd">
+<td>Gain compression ε (×10⁻¹⁷ cm³)</td>
+<td>1 ×10⁻¹⁷ cm³</td>
+<td>Gain compression. It damps the relaxation oscillations and lowers
+the first spike.</td>
+</tr>
+<tr class="even">
+<td>Output efficiency η</td>
+<td>0.4</td>
+<td>Output (differential) efficiency. It scales the power: slope ≈
+η·hν/(2q) ≈ 0.16 W/A for η = 0.4.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The equations are solved with a 4th-order Runge–Kutta method (step ≤
+0.25 ps). To see fast chirp details use a high Samples per bit (128 or
+more). There is no laser noise in this model.</p>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. L. A. Coldren, S. W. Corzine, Diode Lasers and Photonic
+Integrated Circuits, Wiley.</p>
+<h3 id="en-rz-line-coder">5.10 RZ Line Coder</h3>
+<p>Return-to-zero pulses: a 1 is high only for part of the bit (the duty
+cycle).</p>
+<p><em>Ports:</em> in: Bits (binary); out: Drive (electrical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>RZ signal</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mi>k</mi></munder><msub><mi>a</mi><mi>k</mi></msub><mspace width="0.167em"></mspace><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>k</mi><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">f</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi></mrow><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mn>0</mn><mo>≤</mo><mi>t</mi><mo>&lt;</mo><mi>d</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">v(t)=\sum_{k} a_k\,p(t-kT),\qquad p(t)=1\ \ \mathrm{for}\ \ 0\le t&lt; dT</annotation></semantics></math></p>
+<p>d is the duty cycle. A 1 returns to zero before the end of the
+bit.</p>
+<p><em>Driver filter</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mfrac><mrow><mo>ln</mo><mn>2</mn></mrow><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>f</mi><msub><mi>f</mi><mi>d</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>f</mi><mi>d</mi></msub><mo>=</mo><mrow><mi mathvariant="normal">b</mi><mi mathvariant="normal">w</mi></mrow><mo>⋅</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">H(f)=\exp\!\left[-\frac{\ln 2}{2}\left(\frac{f}{f_d}\right)^{2}\right],\qquad f_d=\mathrm{bw}\cdot B</annotation></semantics></math></p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Duty cycle (bit)</td>
+<td>0.5 bit</td>
+<td>A shorter duty cycle gives shorter pulses: a wider spectrum (more
+dispersion) but more time between pulses (less ISI). For the same
+average power the peak power is higher.</td>
+</tr>
+<tr class="even">
+<td>Driver bandwidth (× bit rate)</td>
+<td>1.6 × bit rate</td>
+<td>As for NRZ: a low bandwidth rounds the pulses. RZ needs about twice
+the NRZ bandwidth.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h2 id="en-optical-fibers">6. Optical fibers</h2>
+<h3 id="en-fiber-span">6.1 Fiber Span</h3>
+<p>Loss αL in dB, then dispersion D·L. Laser (coherent) signals: H(f) =
+exp(jπDLλ²f²/c). LED/FP: pulse spreading Δτ = |D|LΔλ.</p>
+<p><em>Ports:</em> in: Input (optical); out: Output (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Loss</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mi>α</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">P_{\mathrm{out}}\,[\mathrm{dBm}]=P_{\mathrm{in}}\,[\mathrm{dBm}]-\alpha L</annotation></semantics></math></p>
+<p>α in dB/km, L in km.</p>
+<p><em>Dispersion of standard SMF (G.652)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><msub><mi>S</mi><mn>0</mn></msub><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo>−</mo><mfrac><msubsup><mi>λ</mi><mn>0</mn><mn>4</mn></msubsup><msup><mi>λ</mi><mn>3</mn></msup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">D(\lambda)=\frac{S_0}{4}\left(\lambda-\frac{\lambda_0^{4}}{\lambda^{3}}\right)</annotation></semantics></math></p>
+<p>λ₀ = 1312 nm, S₀ = 0.092 ps/(nm²·km).</p>
+<p><em>Dispersion on a laser signal (field)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>j</mi><mspace width="0.167em"></mspace><mfrac><mrow><mi>π</mi><mi>D</mi><mi>L</mi><msup><mi>λ</mi><mn>2</mn></msup></mrow><mi>c</mi></mfrac><mspace width="0.167em"></mspace><msup><mi>f</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H(f)=\exp\!\left(j\,\frac{\pi D L \lambda^{2}}{c}\,f^{2}\right)</annotation></semantics></math></p>
+<p>Used for DFB, DML and MZM signals, so chirp and dispersion act
+together.</p>
+<p><em>Wide sources and multimode fiber</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>τ</mi><mo>=</mo><msqrt><mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>D</mi><mo stretchy="true" form="postfix">|</mo></mrow><mi>L</mi><mi>Δ</mi><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>Δ</mi><msubsup><mi>τ</mi><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow><mn>2</mn></msubsup></mrow></msqrt><mo>,</mo><mspace width="2.0em"></mspace><mi>Δ</mi><msub><mi>τ</mi><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub><mo>=</mo><mfrac><mrow><mn>0.44</mn><mspace width="0.167em"></mspace><mi>L</mi></mrow><mrow><mi>B</mi><msub><mi>W</mi><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Delta\tau=\sqrt{\left(|D|L\Delta\lambda\right)^{2}+\Delta\tau_{\mathrm{modal}}^{2}},\qquad \Delta\tau_{\mathrm{modal}}=\frac{0.44\,L}{BW_{\mathrm{modal}}}</annotation></semantics></math></p>
+<p>Gaussian spreading of the intensity (FWHM).</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fiber type</td>
+<td>Single-mode (G.652)</td>
+<td>Sets the automatic values: SMF 2.0 / 0.35 / 0.2 dB/km at 850 / 1310
+/ 1550 nm with D from G.652; MMF 2.5 dB/km at 850 nm; DCF 0.5 dB/km and
+D = −100 ps/(nm·km).</td>
+</tr>
+<tr class="even">
+<td>Length (km)</td>
+<td>20 km</td>
+<td>Loss grows as αL (dB). Dispersion grows as DL (ps/nm).</td>
+</tr>
+<tr class="odd">
+<td>Attenuation (dB/km)</td>
+<td>Auto</td>
+<td>Untick Auto to set your own α.</td>
+</tr>
+<tr class="even">
+<td>Dispersion (ps/(nm·km))</td>
+<td>Auto</td>
+<td>Untick Auto to set your own D. A negative D (DCF) cancels the
+positive D of SMF: L(DCF) = D(SMF)·L(SMF) / |D(DCF)|.</td>
+</tr>
+<tr class="odd">
+<td>Modal bandwidth (MHz·km)</td>
+<td>2000 MHz·km</td>
+<td>Multimode only. Higher modal bandwidth → less modal dispersion.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill. G. P. Agrawal, Fiber-Optic Communication Systems, Wiley.
+ITU-T Recommendation G.652: Characteristics of a single-mode optical
+fibre and cable.</p>
+<h2 id="en-amplifiers-and-passive">7. Amplifiers and passive</h2>
+<h3 id="en-variable-attenuator">7.1 Variable Attenuator</h3>
+<p>Reduces the optical power by a set number of dB (noise is reduced by
+the same amount).</p>
+<p><em>Ports:</em> in: Input (optical); out: Output (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Attenuation</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">P_{\mathrm{out}}\,[\mathrm{dBm}]=P_{\mathrm{in}}\,[\mathrm{dBm}]-A</annotation></semantics></math></p>
+<p>Signal and ASE noise are reduced by the same amount, so the OSNR
+stays the same.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Attenuation (dB)</td>
+<td>10 dB</td>
+<td>Sets the received power. Used to measure receiver sensitivity (the
+power where Q = 6).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="en-erbium-fiber-amplifier-edfa">7.2 Erbium Fiber Amplifier
+(EDFA)</h3>
+<p>Erbium-doped fiber amplifier. Gain control or power control. Adds ASE
+noise; OSNR ≈ 58 + Pin − NF (+3 dB here: one polarization).</p>
+<p><em>Ports:</em> in: Input (optical); out: Output (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Gain</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi></mrow></msub><mo>−</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">G\,[\mathrm{dB}]=P_{\mathrm{out}}-P_{\mathrm{in}}</annotation></semantics></math></p>
+<p>Power control: G is chosen so that Pₒᵤₜ is the value you set.</p>
+<p><em>ASE noise</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">E</mi></mrow></msub><mo>=</mo><msub><mi>n</mi><mrow><mi>s</mi><mi>p</mi></mrow></msub><mspace width="0.167em"></mspace><mi>h</mi><mi>ν</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>G</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>n</mi><mrow><mi>s</mi><mi>p</mi></mrow></msub><mo>≈</mo><mfrac><mi>F</mi><mn>2</mn></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>F</mi><mo>=</mo><msup><mn>10</mn><mrow><mi>N</mi><mi>F</mi><mi>/</mi><mn>10</mn></mrow></msup></mrow><annotation encoding="application/x-tex">S_{\mathrm{ASE}}=n_{sp}\,h\nu\,(G-1),\qquad n_{sp}\approx\frac{F}{2},\quad F=10^{NF/10}</annotation></semantics></math></p>
+<p>Added as Gaussian noise to the field (signal polarization), then a
+Gaussian optical filter.</p>
+<p><em>OSNR (0.1 nm)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">N</mi><mi mathvariant="normal">R</mi></mrow><mo>≈</mo><mn>58</mn><mo>+</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mi>N</mi><mi>F</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{OSNR}\approx 58+P_{\mathrm{in}}\,[\mathrm{dBm}]-NF\,[\mathrm{dB}]</annotation></semantics></math></p>
+<p>Textbook rule (both polarizations). This simulator counts one
+polarization, so its OSNR is about 3 dB higher.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Operation mode</td>
+<td>Gain control</td>
+<td>Gain control: fixed G. Power control: fixed output power (the gain
+changes with the input).</td>
+</tr>
+<tr class="even">
+<td>Gain (dB)</td>
+<td>20 dB</td>
+<td>Raises the signal above the receiver thermal noise. The OSNR does
+not improve with more gain.</td>
+</tr>
+<tr class="odd">
+<td>Output power (dBm)</td>
+<td>-8 dBm</td>
+<td>Output power in power-control mode.</td>
+</tr>
+<tr class="even">
+<td>Noise figure (dB)</td>
+<td>5 dB</td>
+<td>Each 1 dB more NF → 1 dB less OSNR.</td>
+</tr>
+<tr class="odd">
+<td>Optical filter bandwidth (GHz)</td>
+<td>50 GHz</td>
+<td>A narrower optical filter removes more ASE noise (better Q). Too
+narrow cuts the signal spectrum.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> E. Desurvire, Erbium-Doped Fiber
+Amplifiers: Principles and Applications, Wiley, 1994. R. Ramaswami, K.
+N. Sivarajan, G. H. Sasaki, Optical Networks: A Practical Perspective,
+Morgan Kaufmann. G. P. Agrawal, Fiber-Optic Communication Systems,
+Wiley.</p>
+<h3 id="en-optical-coupler-12">7.3 Optical Coupler 1×2</h3>
+<p>Sends part of the light to output 1 and the rest to output 2, with a
+small excess loss.</p>
+<p><em>Ports:</em> in: Input (optical); out: Output 1 (optical); out:
+Output 2 (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Output powers</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>1</mn></msub><mo>=</mo><mi>r</mi><mspace width="0.167em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><msup><mn>10</mn><mrow><mo>−</mo><mi>E</mi><mi>L</mi><mi>/</mi><mn>10</mn></mrow></msup><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>P</mi><mn>2</mn></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><msup><mn>10</mn><mrow><mo>−</mo><mi>E</mi><mi>L</mi><mi>/</mi><mn>10</mn></mrow></msup></mrow><annotation encoding="application/x-tex">P_1=r\,P\,10^{-EL/10},\qquad P_2=(1-r)\,P\,10^{-EL/10}</annotation></semantics></math></p>
+<p>r = 50% gives a 3 dB split.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Power to output 1 (%)</td>
+<td>50 %</td>
+<td>Share of power to output 1 (r). A 50/50 splitter costs 3 dB on each
+output.</td>
+</tr>
+<tr class="even">
+<td>Excess loss (dB)</td>
+<td>0.2 dB</td>
+<td>Extra loss EL of a real splitter.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h2 id="en-receivers">8. Receivers</h2>
+<h3 id="en-avalanche-photodiode-apd">8.1 Avalanche Photodiode (APD)</h3>
+<p>I = M·R·P. Shot noise grows as M²F: σ²shot = 2qM²F·RP·Bn. Thermal
+noise is unchanged, so a moderate M helps.</p>
+<p><em>Ports:</em> in: Optical (optical); out: Current (electrical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Current with gain</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>=</mo><mi>M</mi><mi>R</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">I=M R P</annotation></semantics></math></p>
+<p><em>Shot noise with excess noise</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>σ</mi><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">h</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">t</mi></mrow><mn>2</mn></msubsup><mo>=</mo><mn>2</mn><mi>q</mi><mspace width="0.167em"></mspace><msup><mi>M</mi><mn>2</mn></msup><mi>F</mi><mspace width="0.167em"></mspace><mi>R</mi><mi>P</mi><mspace width="0.167em"></mspace><msub><mi>B</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">\sigma_{\mathrm{shot}}^{2}=2q\,M^{2}F\,RP\,B_n</annotation></semantics></math></p>
+<p>Thermal noise σₜₕ = iₙ√Bₙ is not multiplied.</p>
+<p><em>Excess noise factor</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mi>k</mi><mi>M</mi><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>−</mo><mfrac><mn>1</mn><mi>M</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F=kM+(1-k)\left(2-\frac{1}{M}\right)</annotation></semantics></math></p>
+<p>k = ionization ratio (small k is better).</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gain M</td>
+<td>10</td>
+<td>M raises the signal above the thermal noise, but shot noise grows as
+M²F. Q has a maximum at an optimum M (about 15–20 for k = 0.5).</td>
+</tr>
+<tr class="even">
+<td>Ionization ratio k</td>
+<td>0.5</td>
+<td>Smaller k → smaller F → higher optimum M and higher Q.</td>
+</tr>
+<tr class="odd">
+<td>Quantum efficiency η</td>
+<td>0.8</td>
+<td>Quantum efficiency (as PIN).</td>
+</tr>
+<tr class="even">
+<td>Thermal noise (pA/√Hz)</td>
+<td>20 pA/√Hz</td>
+<td>Thermal noise of the amplifier after the APD.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> R. J. McIntyre, “Multiplication noise in
+uniform avalanche diodes,” IEEE Trans. Electron Devices, 1966. G.
+Keiser, Optical Fiber Communications, McGraw-Hill. G. P. Agrawal,
+Fiber-Optic Communication Systems, Wiley.</p>
+<h3 id="en-bessel-low-pass-filter">8.2 Bessel Low-Pass Filter</h3>
+<p>4th-order Bessel low-pass filter (the usual receiver filter). Cut-off
+≈ 0.75 × bit rate.</p>
+<p><em>Ports:</em> in: Input (electrical); out: Output (electrical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>4th-order Bessel filter</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>105</mn><mrow><msup><mi>s</mi><mn>4</mn></msup><mo>+</mo><mn>10</mn><msup><mi>s</mi><mn>3</mn></msup><mo>+</mo><mn>45</mn><msup><mi>s</mi><mn>2</mn></msup><mo>+</mo><mn>105</mn><mi>s</mi><mo>+</mo><mn>105</mn></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>s</mi><mo>=</mo><mi>j</mi><mspace width="0.167em"></mspace><mn>2.114</mn><mspace width="0.167em"></mspace><mfrac><mi>f</mi><msub><mi>f</mi><mi>c</mi></msub></mfrac></mrow><annotation encoding="application/x-tex">H(s)=\frac{105}{s^{4}+10s^{3}+45s^{2}+105s+105},\qquad s=j\,2.114\,\frac{f}{f_c}</annotation></semantics></math></p>
+<p>Bessel filters have almost constant delay, so pulse shapes are kept.
+The constant delay is removed.</p>
+<p><em>Noise bandwidth</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>n</mi></msub><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mspace width="0.167em"></mspace><mi>d</mi><mi>f</mi><mo>≈</mo><mn>1.1</mn><mspace width="0.167em"></mspace><msub><mi>f</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">B_n=\int_{0}^{\infty}|H(f)|^{2}\,df\approx 1.1\,f_c</annotation></semantics></math></p>
+<p>Receiver noise is added for this bandwidth.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cut-off frequency (× bit rate)</td>
+<td>0.75 × bit rate</td>
+<td>Lower f(c) → less noise but more ISI. Higher f(c) → sharper pulses
+but more noise. The usual choice is about 0.75 × bit rate.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> W. E. Thomson, “Delay networks having
+maximally flat frequency characteristics,” Proc. IEE, 1949. G. P.
+Agrawal, Fiber-Optic Communication Systems, Wiley. G. Keiser, Optical
+Fiber Communications, McGraw-Hill.</p>
+<h3 id="en-gaussian-low-pass-filter">8.3 Gaussian Low-Pass Filter</h3>
+<p>Gaussian low-pass filter. Adds the pending receiver noise for its
+noise bandwidth Bn ≈ 1.06·fc.</p>
+<p><em>Ports:</em> in: Input (electrical); out: Output (electrical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Gaussian filter</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mfrac><mrow><mo>ln</mo><mn>2</mn></mrow><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>f</mi><msub><mi>f</mi><mi>c</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>B</mi><mi>n</mi></msub><mo>≈</mo><mn>1.06</mn><mspace width="0.167em"></mspace><msub><mi>f</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">H(f)=\exp\!\left[-\frac{\ln 2}{2}\left(\frac{f}{f_c}\right)^{2}\right],\qquad B_n\approx 1.06\,f_c</annotation></semantics></math></p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cut-off frequency (× bit rate)</td>
+<td>0.75 × bit rate</td>
+<td>Same trade-off as the Bessel filter: noise against ISI.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h3 id="en-pin-photodiode">8.4 PIN Photodiode</h3>
+<p>I = R·P, R = ηqλ/hc. Noise: σ²shot = 2qRP·Bn, σth = in·√Bn (added by
+the low-pass filter).</p>
+<p><em>Ports:</em> in: Optical (optical); out: Current (electrical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Responsivity and current</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mfrac><mrow><mi>η</mi><mi>q</mi><mi>λ</mi></mrow><mrow><mi>h</mi><mi>c</mi></mrow></mfrac><mo>≈</mo><mfrac><mrow><mi>η</mi><mspace width="0.167em"></mspace><mi>λ</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>μ</mi><mi mathvariant="normal">m</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><mn>1.24</mn></mfrac><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">/</mi><mi mathvariant="normal">W</mi></mrow><mo>,</mo><mspace width="2.0em"></mspace><mi>I</mi><mo>=</mo><mi>R</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">R=\frac{\eta q\lambda}{hc}\approx\frac{\eta\,\lambda[\mu\mathrm{m}]}{1.24}\ \mathrm{A/W},\qquad I=RP</annotation></semantics></math></p>
+<p>About 1 A/W at 1550 nm for η = 0.8.</p>
+<p><em>Noise (added by the low-pass filter)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>σ</mi><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">h</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">t</mi></mrow><mn>2</mn></msubsup><mo>=</mo><mn>2</mn><mi>q</mi><mi>I</mi><mspace width="0.167em"></mspace><msub><mi>B</mi><mi>n</mi></msub><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>σ</mi><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">h</mi></mrow></msub><mo>=</mo><msub><mi>i</mi><mi>n</mi></msub><msqrt><msub><mi>B</mi><mi>n</mi></msub></msqrt></mrow><annotation encoding="application/x-tex">\sigma_{\mathrm{shot}}^{2}=2qI\,B_n,\qquad \sigma_{\mathrm{th}}=i_n\sqrt{B_n}</annotation></semantics></math></p>
+<p>Bₙ is the noise bandwidth of the filter after the photodiode.</p>
+<p><em>Thermal noise density</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>i</mi><mi>n</mi></msub><mo>=</mo><msqrt><mfrac><mrow><mn>4</mn><mi>k</mi><mi>T</mi></mrow><msub><mi>R</mi><mi>L</mi></msub></mfrac></msqrt></mrow><annotation encoding="application/x-tex">i_n=\sqrt{\frac{4kT}{R_L}}</annotation></semantics></math></p>
+<p>iₙ = 20 pA/√Hz is a typical value for a 10 Gb/s receiver.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Quantum efficiency η</td>
+<td>0.8</td>
+<td>Higher η → more current for the same light → better
+sensitivity.</td>
+</tr>
+<tr class="even">
+<td>Thermal noise (pA/√Hz)</td>
+<td>20 pA/√Hz</td>
+<td>Thermal noise dominates in a PIN receiver: lower iₙ → better
+sensitivity.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill. G. P. Agrawal, Fiber-Optic Communication Systems,
+Wiley.</p>
+<h2 id="en-visualizers">9. Visualizers</h2>
+<h3 id="en-eye-ber-meter">9.1 Eye &amp; BER Meter</h3>
+<p>Finds the best sampling time and measures Q = (I1 − I0)/(σ1 + σ0),
+BER = ½ erfc(Q/√2), and the eye diagram.</p>
+<p><em>Ports:</em> in: Electrical (electrical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Q factor</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mfrac><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>−</mo><msub><mi>I</mi><mn>0</mn></msub></mrow><mrow><msub><mi>σ</mi><mn>1</mn></msub><mo>+</mo><msub><mi>σ</mi><mn>0</mn></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">Q=\frac{I_1-I_0}{\sigma_1+\sigma_0}</annotation></semantics></math></p>
+<p>Means and standard deviations of the 1 and 0 levels at the best
+sampling time.</p>
+<p><em>Bit error rate</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">B</mi><mi mathvariant="normal">E</mi><mi mathvariant="normal">R</mi></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>erfc</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>Q</mi><msqrt><mn>2</mn></msqrt></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{BER}=\frac{1}{2}\operatorname{erfc}\left(\frac{Q}{\sqrt{2}}\right)</annotation></semantics></math></p>
+<p>Q = 6 → BER ≈ 10⁻⁹. Q = 7 → BER ≈ 10⁻¹².</p>
+<p><em>Best decision threshold and eye height</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mi>D</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>σ</mi><mn>0</mn></msub><msub><mi>I</mi><mn>1</mn></msub><mo>+</mo><msub><mi>σ</mi><mn>1</mn></msub><msub><mi>I</mi><mn>0</mn></msub></mrow><mrow><msub><mi>σ</mi><mn>0</mn></msub><mo>+</mo><msub><mi>σ</mi><mn>1</mn></msub></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>H</mi><mrow><mi mathvariant="normal">e</mi><mi mathvariant="normal">y</mi><mi mathvariant="normal">e</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>I</mi><mn>1</mn></msub><mo>−</mo><mn>3</mn><msub><mi>σ</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>I</mi><mn>0</mn></msub><mo>+</mo><mn>3</mn><msub><mi>σ</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">I_D=\frac{\sigma_0 I_1+\sigma_1 I_0}{\sigma_0+\sigma_1},\qquad H_{\mathrm{eye}}=(I_1-3\sigma_1)-(I_0+3\sigma_0)</annotation></semantics></math></p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bits drawn in the eye</td>
+<td>300</td>
+<td>Only changes how many bits are drawn in the eye diagram. It does not
+change Q.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The analyzer tries every sampling time in two bit periods and keeps
+the one with the highest Q (the graph ‘Q factor against sampling
+time’).</p>
+<p><strong>Sources:</strong> S. D. Personick, “Receiver design for
+digital fiber optic communication systems,” Bell Syst. Tech. J., 1973.
+G. P. Agrawal, Fiber-Optic Communication Systems, Wiley. G. Keiser,
+Optical Fiber Communications, McGraw-Hill.</p>
+<h3 id="en-electrical-spectrum-monitor">9.2 Electrical Spectrum
+Monitor</h3>
+<p>Shows the power spectrum |X(f)|² of an electrical signal against
+frequency (one side, 0 to f_max).</p>
+<p><em>Ports:</em> in: Electrical (electrical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Power spectrum</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mn>2</mn><mspace width="0.167em"></mspace><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>X</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup></mrow><msup><mi>N</mi><mn>2</mn></msup></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mn>10</mn><msub><mo>log</mo><mn>10</mn></msub><mfrac><mrow><mi>S</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><mn>50</mn><mspace width="0.167em"></mspace><mi>Ω</mi></mrow><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">W</mi></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">S(f)=\frac{2\,|X(f)|^{2}}{N^{2}},\qquad P\,[\mathrm{dBm}]=10\log_{10}\frac{S(f)\cdot 50\,\Omega}{1\ \mathrm{mW}}</annotation></semantics></math></p>
+<p>X(f) is the FFT of the signal (mean removed). Current signals are
+shown as power into 50 Ω; drive signals relative to the peak.</p>
+<p><em>Nulls of NRZ and RZ</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">R</mi><mi mathvariant="normal">Z</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∝</mo><msup><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">c</mi></mrow><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>S</mi><mrow><mi mathvariant="normal">R</mi><mi mathvariant="normal">Z</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∝</mo><msup><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">c</mi></mrow><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mspace width="0.167em"></mspace><mi>d</mi><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">S_{\mathrm{NRZ}}(f)\propto \mathrm{sinc}^{2}(fT),\qquad S_{\mathrm{RZ}}(f)\propto \mathrm{sinc}^{2}(f\,dT)</annotation></semantics></math></p>
+<p>First null at f = B for NRZ and at f = B/d for RZ (d = duty cycle):
+RZ needs about twice the bandwidth.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frequency span (× bit rate)</td>
+<td>4 × bit rate</td>
+<td>Highest frequency shown, as a multiple of the bit rate.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="en-optical-spectrum-monitor">9.3 Optical Spectrum Monitor</h3>
+<p>Optical spectrum (dBm in the resolution bandwidth). Shows OSNR when
+an EDFA is before it.</p>
+<p><em>Ports:</em> in: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Spectrum</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>f</mi><mo>−</mo><msub><mi>f</mi><mi>λ</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>&lt;</mo><mi>R</mi><mi>B</mi><mi>W</mi><mi>/</mi><mn>2</mn></mrow></munder><mfrac><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><msup><mi>N</mi><mn>2</mn></msup></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>Δ</mi><mi>λ</mi><mo>=</mo><mfrac><msup><mi>λ</mi><mn>2</mn></msup><mi>c</mi></mfrac><mspace width="0.167em"></mspace><mi>Δ</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">P(\lambda)=\sum_{|f-f_\lambda|&lt;RBW/2}\frac{|E(f)|^{2}}{N^{2}},\qquad \Delta\lambda=\frac{\lambda^{2}}{c}\,\Delta f</annotation></semantics></math></p>
+<p>Power in the resolution bandwidth around each wavelength.</p>
+<p><em>OSNR</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">N</mi><mi mathvariant="normal">R</mi></mrow><mo>=</mo><mn>10</mn><msub><mo>log</mo><mn>10</mn></msub><mfrac><msub><mi>P</mi><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">g</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub><mrow><msub><mi>S</mi><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">E</mi></mrow></msub><mo>⋅</mo><mn>12.5</mn><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">G</mi><mi mathvariant="normal">H</mi><mi mathvariant="normal">z</mi></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\mathrm{OSNR}=10\log_{10}\frac{P_{\mathrm{signal}}}{S_{\mathrm{ASE}}\cdot 12.5\ \mathrm{GHz}}</annotation></semantics></math></p>
+<p>12.5 GHz = 0.1 nm at 1550 nm.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Resolution bandwidth filter</td>
+<td>On</td>
+<td>On: power in the resolution bandwidth (like a real OSA). Off: the
+power of each FFT bin, the finest detail the simulation can show.</td>
+</tr>
+<tr class="even">
+<td>Resolution bandwidth (nm)</td>
+<td>0.01 nm</td>
+<td>A wider resolution bandwidth collects more noise in each point
+(higher noise floor) and smooths the spectrum. The total power does not
+change.</td>
+</tr>
+<tr class="odd">
+<td>Horizontal axis</td>
+<td>Wavelength (nm)</td>
+<td>Show the spectrum against wavelength (nm) or frequency (THz).</td>
+</tr>
+<tr class="even">
+<td>Span (laser signals) (nm)</td>
+<td>0.8 nm</td>
+<td>Width of the wavelength window for laser signals (display
+only).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> R. Ramaswami, K. N. Sivarajan, G. H.
+Sasaki, Optical Networks: A Practical Perspective, Morgan Kaufmann. G.
+P. Agrawal, Fiber-Optic Communication Systems, Wiley.</p>
+<h3 id="en-power-chirp-monitor">9.4 Power &amp; Chirp Monitor</h3>
+<p>Shows the optical power P(t) = |E(t)|² and the chirp Δν(t) =
+(1/2π)·dφ/dt of an optical signal against time.</p>
+<p><em>Ports:</em> in: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Optical power</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">P(t)=|E(t)|^{2}</annotation></semantics></math></p>
+<p>Shown in mW against time.</p>
+<p><em>Chirp (instantaneous frequency deviation)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>ν</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mi>π</mi></mrow></mfrac><mfrac><mrow><mi>d</mi><mi>φ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Delta\nu(t)=\frac{1}{2\pi}\frac{d\varphi(t)}{dt}</annotation></semantics></math></p>
+<p>φ(t) is the phase of the optical field. An external modulator gives
+Δν ≈ 0; a directly modulated laser gives large Δν at the bit edges.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bits shown</td>
+<td>32</td>
+<td>Number of bits shown (display only).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h3 id="en-optical-power-meter">9.5 Optical Power Meter</h3>
+<p>Shows the average optical power in dBm and in W.</p>
+<p><em>Ports:</em> in: Optical (optical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>Average power</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mfrac><mn>1</mn><mi>N</mi></mfrac><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>E</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mo>,</mo><mspace width="2.0em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mn>10</mn><msub><mo>log</mo><mn>10</mn></msub><mfrac><mi>P</mi><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">W</mi></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">P=\frac{1}{N}\sum_{i}|E_i|^{2},\qquad P\,[\mathrm{dBm}]=10\log_{10}\frac{P}{1\ \mathrm{mW}}</annotation></semantics></math></p>
+<p><strong>Sources:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="en-time-signal-scope">9.6 Time-Signal Scope</h3>
+<p>Shows the first bits of a signal in time. Optical input: power in mW.
+Electrical input: current in mA (or drive level).</p>
+<p><em>Ports:</em> in: Signal (optical or electrical).</p>
+<p><strong>Governing equations</strong></p>
+<p><em>What is shown</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mspace width="1.0em"></mspace><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi></mrow><mspace width="1.0em"></mspace><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">P(t)=|E(t)|^{2}\quad \mathrm{or}\quad i(t)</annotation></semantics></math></p>
+<p>Optical input: power in mW. Electrical input: current in mA.</p>
+<p><strong>How the settings change the result</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bits shown</td>
+<td>32</td>
+<td>Number of bits shown (display only).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Sources:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h1 id="en-sources">Sources</h1>
+<ol type="1">
+<li>G. Keiser, Optical Fiber Communications, McGraw-Hill.</li>
+<li>G. P. Agrawal, Fiber-Optic Communication Systems, Wiley.</li>
+<li>R. Ramaswami, K. N. Sivarajan, G. H. Sasaki, Optical Networks: A
+Practical Perspective, Morgan Kaufmann.</li>
+<li>E. Desurvire, Erbium-Doped Fiber Amplifiers: Principles and
+Applications, Wiley, 1994.</li>
+<li>L. A. Coldren, S. W. Corzine, Diode Lasers and Photonic Integrated
+Circuits, Wiley.</li>
+<li>C. H. Henry, “Theory of the linewidth of semiconductor lasers,” IEEE
+J. Quantum Electron., 1982.</li>
+<li>T. L. Koch, R. A. Linke, “Effect of nonlinear gain reduction on
+semiconductor laser wavelength chirping,” Appl. Phys. Lett., 1986.</li>
+<li>R. J. McIntyre, “Multiplication noise in uniform avalanche diodes,”
+IEEE Trans. Electron Devices, 1966.</li>
+<li>S. D. Personick, “Receiver design for digital fiber optic
+communication systems,” Bell Syst. Tech. J., 1973.</li>
+<li>ITU-T Recommendation G.652: Characteristics of a single-mode optical
+fibre and cable.</li>
+<li>ITU-T Recommendation O.150: Test patterns (PRBS) for digital
+transmission equipment.</li>
+<li>W. E. Thomson, “Delay networks having maximally flat frequency
+characteristics,” Proc. IEE, 1949.</li>
+</ol>
+<p>Equations are standard textbook results. The sources are the usual
+references for each equation; check the edition you use for chapter and
+page numbers.</p>
+</div>
+<div id="ar" lang="ar" dir="rtl" hidden><nav aria-label="Contents" id="ar-TOC" role="doc-toc">
+<ul>
+<li><a href="#ar-fiberlab-sim-المساعدة"
+id="ar-toc-fiberlab-sim-المساعدة">FiberLab Sim — المساعدة</a>
+<ul>
+<li><a href="#ar-طريقة-استخدام-البرنامج"
+id="ar-toc-طريقة-استخدام-البرنامج">1. طريقة استخدام البرنامج</a></li>
+<li><a href="#ar-الإشارات-على-الأسلاك"
+id="ar-toc-الإشارات-على-الأسلاك">2. الإشارات على الأسلاك</a></li>
+<li><a href="#ar-قراءة-النتائج" id="ar-toc-قراءة-النتائج">3. قراءة
+النتائج</a></li>
+<li><a href="#ar-حدود-النموذج" id="ar-toc-حدود-النموذج">4. حدود
+النموذج</a></li>
+</ul></li>
+<li><a href="#ar-مرجع-المكونات" id="ar-toc-مرجع-المكونات">مرجع
+المكونات</a>
+<ul>
+<li><a href="#ar-المرسلات-transmitters"
+id="ar-toc-المرسلات-transmitters">5. المرسلات (Transmitters)</a></li>
+<li><a href="#ar-الألياف-الضوئية-optical-fibers"
+id="ar-toc-الألياف-الضوئية-optical-fibers">6. الألياف الضوئية (Optical
+fibers)</a></li>
+<li><a href="#ar-المضخمات-والمكونات-المنفعلة-amplifiers-and-passive"
+id="ar-toc-المضخمات-والمكونات-المنفعلة-amplifiers-and-passive">7.
+المضخمات والمكونات المنفعلة (Amplifiers and passive)</a></li>
+<li><a href="#ar-المستقبلات-receivers"
+id="ar-toc-المستقبلات-receivers">8. المستقبلات (Receivers)</a></li>
+<li><a href="#ar-أجهزة-العرض-visualizers"
+id="ar-toc-أجهزة-العرض-visualizers">9. أجهزة العرض
+(Visualizers)</a></li>
+</ul></li>
+<li><a href="#ar-المصادر" id="ar-toc-المصادر">المصادر</a></li>
+</ul>
+</nav>
+
+
+<h1 id="ar-fiberlab-sim-المساعدة">FiberLab Sim — المساعدة</h1>
+<p><em>By: Dr. Ahmed A. Al-Chalaby · Version 1.20 beta</em></p>
+<p>FiberLab Sim برنامج تعليمي لتصميم وصلات الألياف الضوئية ومحاكاتها،
+توضع فيه المكونات على لوحة رسم وتُربط بوصلات كما في برامج محاكاة الأنظمة
+الضوئية التجارية، ويعمل في متصفح الإنترنت. تشرح هذه المساعدة طريقة
+استخدام البرنامج، ولكل مكوّن: المعادلات الحاكمة، وكيف يغيّر كل إعداد
+النتيجة، ومصادر المعادلات.</p>
+<h2 id="ar-طريقة-استخدام-البرنامج">1. طريقة استخدام البرنامج</h2>
+<ol type="1">
+<li><strong>اختر التجربة</strong> من القائمة في الأعلى: <em>Free
+design</em> (تصميم حر)، أو <em>Tutorial</em> (درس بمخطط جاهز للتعلّم)، أو
+<em>Assignment</em> (واجب تبنيه بنفسك، بقيم شخصية من اسمك الكامل،
+ويُصحَّح).</li>
+<li><strong>أضف المكونات:</strong> اسحب المكوّن من المكتبة (يساراً) إلى
+لوحة الرسم. في الهاتف المس المكوّن.</li>
+<li><strong>التوصيل:</strong> اسحب من منفذ خرج (يمين الكتلة) إلى منفذ
+دخل (يسارها). للمنافذ والأسلاك ألوان: ضوئي (أحمر)، كهربائي (أزرق)، ثنائي
+(رمادي متقطع). لا يُوصل إلا منفذان من النوع نفسه. ويمكن أن يغذي خرج واحد
+عدة مداخل (مثلاً ليفاً ومقياس قدرة).</li>
+<li><strong>اضبط المكونات:</strong> اختر الكتلة لترى إعداداتها يميناً.
+اضغط <strong>?</strong> (المساعدة) لترى معادلاتها.</li>
+<li><strong>اضغط ▶ Run:</strong> يشغّل البرنامج المكونات بترتيب الأسلاك.
+تظهر النتائج فوق أجهزة العرض وفي قسم <em>Results</em>.</li>
+<li><strong>افتح جهاز العرض</strong> (نقر مزدوج، أو <em>Open
+graphs</em>) لترى رسومه: مخطط العين، و Q مقابل لحظة أخذ العينة، والطيف،
+والإشارة مع الزمن.</li>
+<li><strong>Sweep:</strong> غيّر إعداداً واحداً خطوة بخطوة وقِس نتيجة واحدة
+(مثلاً Q مقابل طول الليف)، ثم انسخ الجدول إلى Word أو Excel.</li>
+<li><strong>Global settings:</strong> معدل البتات (حتى 40 Gb/s) وطول
+التسلسل (من 8 إلى 1024 بت) وعدد العينات لكل بت (من 8 إلى 512)، للمخطط
+كله. استعمل عدداً كبيراً من العينات لكل بت مع التسلسلات القصيرة فقط (مثلاً
+لدراسة chirp الليزر).</li>
+<li><strong>Export</strong> يحفظ المخطط في ملف (.json)، و
+<strong>Import</strong> يفتح ملف مخطط (ويمكنك أيضاً إفلات الملف على لوحة
+الرسم).</li>
+<li><strong>Send result</strong> (للواجبات فقط، بعد Run): اكتب اسمك
+وشعبتك؛ يكوّن البرنامج تقريراً مختصراً مع رمز تحقق (مخططك ونتائجك) ويفتح
+نموذج مدرّسك، أو يتيح نسخ التقرير. في المرة الأولى الصق <strong>رمز
+الصف</strong> (يبدأ بـ OSC1.) الذي يعطيك إياه مدرّسك. لا تعدّل الرمز: صفحة
+التصحيح تعيد حساب مخططك للتحقق منه.</li>
+</ol>
+<p>لحذف كتلة أو سلك اختره واضغط <em>Delete</em> (أو زر الحذف). وزر
+<em>Reset lab</em> يعيد مخطط التجربة الأصلي.</p>
+<h2 id="ar-الإشارات-على-الأسلاك">2. الإشارات على الأسلاك</h2>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>السلك</th>
+<th>ما يحمله</th>
+<th>الوحدة</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ثنائي (Binary)</td>
+<td>تسلسل البتات والأساس الزمني (معدل البتات، العينات لكل بت)</td>
+<td>بت</td>
+</tr>
+<tr class="even">
+<td>كهربائي (Electrical)</td>
+<td>إشارة الدفع (من 0 إلى 1) أو التيار الضوئي</td>
+<td>A</td>
+</tr>
+<tr class="odd">
+<td>ضوئي (Optical)</td>
+<td>المجال الضوئي المركّب، الطول الموجي، العرض الطيفي، مستوى ضوضاء
+ASE</td>
+<td>√W</td>
+</tr>
+</tbody>
+</table></div>
+<p>الكاشف الضوئي يعطي التيار النظيف، وضوضاء الطلقات والضوضاء الحرارية
+يضيفهما المرشح منخفض التمرير الذي بعده، لعرض نطاق الضوضاء لذلك المرشح.
+وإذا لم يُستخدم مرشح، يضيف محلّل BER الضوضاء على كامل عرض نطاق المحاكاة
+(ويظهر تنبيهاً).</p>
+<h2 id="ar-قراءة-النتائج">3. قراءة النتائج</h2>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Q</th>
+<th>BER</th>
+<th>المعنى</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Q ≥ 6</td>
+<td>≤ 10⁻⁹</td>
+<td>تعمل (أخضر)</td>
+</tr>
+<tr class="even">
+<td>من 4.75 إلى 6</td>
+<td>من 10⁻⁶ إلى 10⁻⁹</td>
+<td>حدّية: تحتاج تصحيح أخطاء FEC (أصفر)</td>
+</tr>
+<tr class="odd">
+<td>Q &lt; 4.75</td>
+<td>&gt; 10⁻⁶</td>
+<td>لا تعمل (أحمر)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="ar-حدود-النموذج">4. حدود النموذج</h2>
+<ul>
+<li>لا تأثيرات لاخطية في الليف (SPM و XPM و FWM)، ولا تشتت استقطابي PMD،
+ولا تأثيرات استقطاب.</li>
+<li>يُعامَل الـ LED وليزر Fabry–Pérot كمصدرين غير مترابطين: التشتت يوسّع
+شدتهما.</li>
+<li>ليزر معادلات المعدل (Rate-Equation Laser) بلا ضوضاء ليزر (لا ضوضاء
+شدة ولا ضوضاء طور).</li>
+<li>يُقاس Q على 512 بت بافتراض ضوضاء غاوسية؛ وقيم BER الصغيرة جداً تُحسب من
+Q ولا تُعدّ.</li>
+<li>بعض القيم (تخميد الليزر، الـ chirp الأديباتي، الضوضاء الحرارية، عرض
+المرشح) اختيرت لتقترب النتائج من القيم النموذجية في الكتب.</li>
+<li>الضوضاء ببذرة ثابتة: المخطط والإعدادات نفسها تعطي دائماً الأرقام
+نفسها.</li>
+</ul>
+<h1 id="ar-مرجع-المكونات">مرجع المكونات</h1>
+<h2 id="ar-المرسلات-transmitters">5. المرسلات (Transmitters)</h2>
+<h3 id="ar-dfb-laser-cw">5.1 DFB Laser (CW)</h3>
+<p>ليزر أحادي النمط (DFB) يعمل بشكل مستمر. طيف ضيق وقدرة ثابتة.</p>
+<p><em>المنافذ:</em> خرج: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>المجال الخارج</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msqrt><msub><mi>P</mi><mrow><mi mathvariant="normal">C</mi><mi mathvariant="normal">W</mi></mrow></msub></msqrt><mo>,</mo><mspace width="2.0em"></mspace><mi>ν</mi><mo>=</mo><mfrac><mi>c</mi><mi>λ</mi></mfrac></mrow><annotation encoding="application/x-tex">E(t)=\sqrt{P_{\mathrm{CW}}},\qquad \nu=\frac{c}{\lambda}</annotation></semantics></math></p>
+<p>ليزر يبقى مشغّلاً. عرض خطه يُعدّ صفراً (أصغر بكثير من عرض الإشارة).</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Power (dBm)</td>
+<td>3 dBm</td>
+<td>يحدد قدرة الحامل. بعد معدِّل ماخ-زيندر تكون القدرة المتوسطة أقل بحوالي
+3 dB (لأن الضوء مطفأ نصف الوقت).</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>1550 nm</td>
+<td>يحدد خسارة الليف وتشتته (القيم التلقائية)، واستجابية الكاشف R ∝ λ،
+وطاقة الفوتون hν المستخدمة في ضوضاء المضخم.</td>
+</tr>
+<tr class="odd">
+<td>Linewidth (MHz)</td>
+<td>0 MHz</td>
+<td>عرض خط الليزر Δν (ضوضاء الطور، مشي عشوائي للطور). يوسّع خط الحامل في
+الطيف. القيمة 0 ليزر مثالي (مستخدمة في الدروس والواجبات)، وليزر DFB
+النموذجي له نحو 1–10 MHz.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="ar-direct-modulation-laser">5.2 Direct-Modulation Laser</h3>
+<p>ليزر DFB يُعدَّل بتياره. استجابة من الدرجة الثانية (fr) و chirp: Δν =
+α/4π·d(lnP)/dt + κ(P − P̄).</p>
+<p><em>المنافذ:</em> دخل: Drive (كهربائي); خرج: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>مستويات القدرة</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>1</mn></msub><mo>=</mo><mfrac><mover><mi>P</mi><mo accent="true">¯</mo></mover><mrow><mi>m</mi><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>E</mi><mi>R</mi></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>P</mi><mn>0</mn></msub><mo>=</mo><mfrac><msub><mi>P</mi><mn>1</mn></msub><mrow><mi>E</mi><mi>R</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">P_1=\frac{\overline{P}}{m+(1-m)/ER},\qquad P_0=\frac{P_1}{ER}</annotation></semantics></math></p>
+<p>m = 0.5 في NRZ (نصف البتات آحاد).</p>
+<p><em>استجابة تعديل الليزر</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mi>/</mi><msub><mi>f</mi><mi>r</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>j</mi><mspace width="0.167em"></mspace><mfrac displaystyle="true"><mrow><mi>f</mi><mi>/</mi><msub><mi>f</mi><mi>r</mi></msub></mrow><msub><mi>Q</mi><mi>r</mi></msub></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">H(f)=\frac{1}{1-\left(f/f_r\right)^{2}+j\,\dfrac{f/f_r}{Q_r}}</annotation></semantics></math></p>
+<p>استجابة من الدرجة الثانية مستمدة من معادلات المعدّل: رنين عند fᵣ
+وتخميد Qᵣ.</p>
+<p><em>انزياح التردد (chirp)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>ν</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mi>α</mi><mrow><mn>4</mn><mi>π</mi></mrow></mfrac><mspace width="0.167em"></mspace><mfrac><mrow><mi>d</mi><mo>ln</mo><mi>P</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>+</mo><mi>κ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo>−</mo><mover><mi>P</mi><mo accent="true">¯</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta\nu(t)=\frac{\alpha}{4\pi}\,\frac{d\ln P}{dt}+\kappa\left(P-\overline{P}\right)</annotation></semantics></math></p>
+<p>chirp عابر (α) عند الحواف، و chirp أديباتي (κ): الآحاد والأصفار
+بترددات مختلفة.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Average power (dBm)</td>
+<td>0 dBm</td>
+<td>القدرة المتوسطة المُطلقة P̄.</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>1550 nm</td>
+<td>عند 1550 nm (D ≈ 17 ps/(nm·km)) يتحول الـ chirp إلى اتساع كبير
+للنبضة؛ وعند 1310 nm (D ≈ 0) يكون أثره قليلاً.</td>
+</tr>
+<tr class="odd">
+<td>Extinction ratio (dB)</td>
+<td>6 dB</td>
+<td>ER منخفض (4–8 dB نموذجياً في DML) ← فتحة عين صغيرة. وفي الليزرات
+الحقيقية ER أعلى يعني P₀ أقل و chirp أقوى.</td>
+</tr>
+<tr class="even">
+<td>Chirp factor α</td>
+<td>5</td>
+<td>α = 0 ← لا chirp عابر. α أكبر ← طيف أعرض ← عقوبة تشتت أكبر بكثير بعد
+الليف عند 1550 nm.</td>
+</tr>
+<tr class="odd">
+<td>Adiabatic chirp κ (GHz/mW)</td>
+<td>2 GHz/mW</td>
+<td>chirp أديباتي: الآحاد والأصفار بترددات مختلفة، فتصل في أوقات مختلفة
+بعد التشتت.</td>
+</tr>
+<tr class="even">
+<td>Resonance frequency fr (GHz)</td>
+<td>12 GHz</td>
+<td>fᵣ أعلى ← ليزر أسرع. إذا اقترب fᵣ من معدل البتات تظهر اهتزازات في
+العين وتنغلق.</td>
+</tr>
+<tr class="odd">
+<td>Resonance damping Qr</td>
+<td>1.6</td>
+<td>Qᵣ أعلى ← تخميد أقل ← تجاوز واهتزاز أكثر.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> L. A. Coldren, S. W. Corzine, Diode Lasers
+and Photonic Integrated Circuits, Wiley. C. H. Henry, “Theory of the
+linewidth of semiconductor lasers,” IEEE J. Quantum Electron., 1982. T.
+L. Koch, R. A. Linke, “Effect of nonlinear gain reduction on
+semiconductor laser wavelength chirping,” Appl. Phys. Lett., 1986. G. P.
+Agrawal, Fiber-Optic Communication Systems, Wiley.</p>
+<h3 id="ar-multimode-fp-laser">5.3 Multimode FP Laser</h3>
+<p>ليزر متعدد الأنماط. عدة أنماط داخل عرض Δλ (1–5 nm)، لذا يكون التشتت
+كبيراً.</p>
+<p><em>المنافذ:</em> دخل: Drive (كهربائي); خرج: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>المسافة بين أنماط التجويف</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><msub><mi>λ</mi><mi>m</mi></msub><mo>=</mo><mfrac><msup><mi>λ</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>n</mi><msub><mi>L</mi><mi>c</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Delta\lambda_{m}=\frac{\lambda^{2}}{2nL_c}</annotation></semantics></math></p>
+<p>عدة أنماط تقع داخل العرض الطيفي Δλ.</p>
+<p><em>اتساع النبضة في الليف</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>τ</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>D</mi><mo stretchy="true" form="postfix">|</mo></mrow><mspace width="0.167em"></mspace><mi>L</mi><mspace width="0.167em"></mspace><mi>Δ</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">\Delta\tau=|D|\,L\,\Delta\lambda</annotation></semantics></math></p>
+<p>يُعامَل ليزر FP كمصدر غير مترابط عرضه Δλ.</p>
+<p><em>استجابة التعديل</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mi>/</mi><msub><mi>f</mi><mi>r</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>j</mi><mspace width="0.167em"></mspace><mfrac displaystyle="true"><mrow><mi>f</mi><mi>/</mi><msub><mi>f</mi><mi>r</mi></msub></mrow><mn>1.6</mn></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">H(f)=\frac{1}{1-\left(f/f_r\right)^{2}+j\,\dfrac{f/f_r}{1.6}}</annotation></semantics></math></p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Average power (dBm)</td>
+<td>0 dBm</td>
+<td>القدرة المتوسطة المُطلقة.</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>1310 nm</td>
+<td>اختر 1310 nm (D ≈ 0) لتتجنب مشكلة التشتت الناتجة عن الطيف
+العريض.</td>
+</tr>
+<tr class="odd">
+<td>Extinction ratio (dB)</td>
+<td>6 dB</td>
+<td>نسبة الإطفاء للتعديل المباشر.</td>
+</tr>
+<tr class="even">
+<td>Spectral width (FWHM) (nm)</td>
+<td>2 nm</td>
+<td>طيف أعرض ← اتساع أكبر Δτ = |D|LΔλ ← أقصى طول أقصر.</td>
+</tr>
+<tr class="odd">
+<td>Mode spacing (nm)</td>
+<td>0.6 nm</td>
+<td>يغيّر الرسم في محلّل الطيف فقط (الأنماط).</td>
+</tr>
+<tr class="even">
+<td>Resonance frequency fr (GHz)</td>
+<td>12 GHz</td>
+<td>تردد الرنين: يحدد سرعة الليزر.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill. G. P. Agrawal, Fiber-Optic Communication Systems,
+Wiley.</p>
+<h3 id="ar-optical-gaussian-pulse-source">5.4 Optical Gaussian Pulse
+Source</h3>
+<p>كل بت 1 يعطي نبضة ضوئية غاوسية E(t) = √P₀·exp[−(1 + jC)t²/(2T₀²)] حيث
+T₀ = T_FWHM/1.665، في منتصف البت.</p>
+<p><em>المنافذ:</em> دخل: Bits (ثنائي); خرج: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>نبضة غاوسية مع chirp</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msqrt><msub><mi>P</mi><mn>0</mn></msub></msqrt><mspace width="0.167em"></mspace><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mfrac><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>j</mi><mi>C</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><msup><mi>t</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><msubsup><mi>T</mi><mn>0</mn><mn>2</mn></msubsup></mrow></mfrac><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>T</mi><mrow><mi mathvariant="normal">F</mi><mi mathvariant="normal">W</mi><mi mathvariant="normal">H</mi><mi mathvariant="normal">M</mi></mrow></msub><mo>=</mo><mn>2</mn><msqrt><mrow><mo>ln</mo><mn>2</mn></mrow></msqrt><mspace width="0.167em"></mspace><msub><mi>T</mi><mn>0</mn></msub><mo>≈</mo><mn>1.665</mn><mspace width="0.167em"></mspace><msub><mi>T</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">E(0,t)=\sqrt{P_0}\,\exp\!\left[-\frac{(1+jC)\,t^{2}}{2T_0^{2}}\right],\qquad T_{\mathrm{FWHM}}=2\sqrt{\ln 2}\,T_0\approx1.665\,T_0</annotation></semantics></math></p>
+<p>نبضة واحدة في منتصف كل بت 1. عندما C &gt; 0 يزداد التردد من مقدمة
+النبضة إلى نهايتها.</p>
+<p><em>طول التشتت</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>D</mi></msub><mo>=</mo><mfrac><msubsup><mi>T</mi><mn>0</mn><mn>2</mn></msubsup><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>β</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>β</mi><mn>2</mn></msub><mo>=</mo><mo>−</mo><mfrac><mrow><mi>D</mi><msup><mi>λ</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>π</mi><mi>c</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">L_D=\frac{T_0^{2}}{|\beta_2|},\qquad \beta_2=-\frac{D\lambda^{2}}{2\pi c}</annotation></semantics></math></p>
+<p>في الليف أحادي النمط عند 1550 nm تعطي D ≈ 16 ps/(nm·km) قيمة β₂ ≈ −20
+ps²/km.</p>
+<p><em>عرض النبضة بعد مسافة z</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>T</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msub><mi>T</mi><mn>0</mn></msub></mfrac><mo>=</mo><msqrt><mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mfrac><mrow><mi>C</mi><msub><mi>β</mi><mn>2</mn></msub><mi>z</mi></mrow><msubsup><mi>T</mi><mn>0</mn><mn>2</mn></msubsup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mi>β</mi><mn>2</mn></msub><mi>z</mi></mrow><msubsup><mi>T</mi><mn>0</mn><mn>2</mn></msubsup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">\frac{T(z)}{T_0}=\sqrt{\left(1+\frac{C\beta_2 z}{T_0^{2}}\right)^{2}+\left(\frac{\beta_2 z}{T_0^{2}}\right)^{2}}</annotation></semantics></math></p>
+<p>عندما C = 0 يزداد العرض بمقدار √2 عند z = L(D) وتنخفض القدرة القصوى
+بمقدار √2. وعندما C·β₂ &lt; 0 تقصر النبضة أولاً.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Peak power (dBm)</td>
+<td>0 dBm</td>
+<td>القدرة القصوى لكل نبضة.</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>1550 nm</td>
+<td>الطول الموجي للحامل (يحدد D للليف في الوضع التلقائي).</td>
+</tr>
+<tr class="odd">
+<td>Pulse width (FWHM) (× bit period)</td>
+<td>0.5 × bit period</td>
+<td>العرض FWHM كجزء من زمن البت. النبضة الأقصر طيفها أعرض فتتسع أسرع
+(L(D) ∝ T₀²).</td>
+</tr>
+<tr class="even">
+<td>Initial chirp C</td>
+<td>0</td>
+<td>الـ chirp الخطي الابتدائي C. في الليف العادي عند 1550 nm (β₂ &lt; 0)
+قيمة C الموجبة تضغط النبضة أولاً، والسالبة تجعلها تتسع أسرع.</td>
+</tr>
+</tbody>
+</table></div>
+<p>استعمل Bit Source › Pattern = Single 1 لرؤية نبضة واحدة منفردة.</p>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h3 id="ar-led">5.5 LED</h3>
+<p>دايود باعث للضوء. بطيء (عمر الحامل τ) وطيفه عريض: Δλ ≈
+1.45·λ²·kT.</p>
+<p><em>المنافذ:</em> دخل: Drive (كهربائي); خرج: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>العرض الطيفي</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>λ</mi><mo>≈</mo><mn>1.45</mn><mspace width="0.167em"></mspace><msup><mi>λ</mi><mn>2</mn></msup><mspace width="0.167em"></mspace><mi>k</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">\Delta\lambda\approx 1.45\,\lambda^{2}\,kT</annotation></semantics></math></p>
+<p>λ بالمايكرومتر و kT بالـ eV يعطيان Δλ بالمايكرومتر (kT = 0.0259 eV
+عند 300 K).</p>
+<p><em>استجابة التعديل وعرض النطاق</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>j</mi><mn>2</mn><mi>π</mi><mi>f</mi><mi>τ</mi></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>f</mi><mrow><mn>3</mn><mspace width="0.167em"></mspace><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mi>π</mi><mi>τ</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">H(f)=\frac{1}{1+j2\pi f\tau},\qquad f_{3\,\mathrm{dB}}=\frac{1}{2\pi\tau}</annotation></semantics></math></p>
+<p>τ هو عمر حاملات الشحنة.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Average power (dBm)</td>
+<td>-15 dBm</td>
+<td>القدرة المتوسطة الداخلة في الليف (الـ LED يعطي قدرة قليلة، حوالي −20
+إلى −10 dBm).</td>
+</tr>
+<tr class="even">
+<td>Wavelength (nm)</td>
+<td>850 nm</td>
+<td>Δλ يزداد مع λ²: حوالي 27 nm عند 850 nm و 60 nm عند 1310 nm.</td>
+</tr>
+<tr class="odd">
+<td>Extinction ratio (dB)</td>
+<td>6 dB</td>
+<td>نسبة الإطفاء.</td>
+</tr>
+<tr class="even">
+<td>Carrier lifetime τ (ns)</td>
+<td>2 ns</td>
+<td>τ أطول ← عرض نطاق أقل (2 ns ← 80 MHz). الـ LED لا يستطيع متابعة
+البتات السريعة.</td>
+</tr>
+<tr class="odd">
+<td>Temperature (K)</td>
+<td>300 K</td>
+<td>حرارة أعلى ← طيف أعرض (Δλ ∝ kT).</td>
+</tr>
+<tr class="even">
+<td>Spectral width (FWHM) (nm)</td>
+<td>Auto</td>
+<td>Auto: يُحسب Δλ من المعادلة أعلاه. أدخل قيمة لاستعمال العرض المذكور في
+ورقة بيانات الجهاز (الـ LED الحقيقي حوالي 30 إلى 180 nm).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="ar-external-modulator-mz">5.6 External Modulator (MZ)</h3>
+<p>معدِّل خارجي (غير مباشر) بدفع متوازن عند نقطة نصف القدرة: E_out =
+E_in·cos[π/2·(½ − a(v − ½))]، و a تحددها نسبة الإطفاء. بلا chirp.</p>
+<p><em>المنافذ:</em> دخل: Carrier (ضوئي); دخل: Modulation (كهربائي);
+خرج: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>المجال الخارج</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>E</mi><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>E</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>cos</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mfrac><mi>π</mi><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>−</mo><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>v</mi><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><msup><mn>10</mn><mrow><mo>−</mo><mi>I</mi><mi>L</mi><mi>/</mi><mn>20</mn></mrow></msup></mrow><annotation encoding="application/x-tex">E_{\mathrm{out}}(t)=E_{\mathrm{in}}(t)\cos\!\left[\frac{\pi}{2}\left(\frac{1}{2}-a\left(v-\frac{1}{2}\right)\right)\right]10^{-IL/20}</annotation></semantics></math></p>
+<p>v هي إشارة الدفع (من 0 إلى 1). المعدِّل منحاز عند نقطة نصف القدرة،
+فتبقى القدرة المتوسطة نصف قدرة الدخل مهما كانت ER. دفع متوازن
+(push-pull): لا تغيّر في الطور، فلا يوجد chirp.</p>
+<p><em>سعة الدفع من نسبة الإطفاء</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>4</mn><mi>π</mi></mfrac><mo>arctan</mo><mfrac><mn>1</mn><msqrt><mrow><mi>E</mi><mi>R</mi></mrow></msqrt></mfrac></mrow><annotation encoding="application/x-tex">a=1-\frac{4}{\pi}\arctan\frac{1}{\sqrt{ER}}</annotation></semantics></math></p>
+<p>ER نسبة الإطفاء (خطية). a = 1 تعطي مستوى 0 مثالياً، وسعة أصغر تعطي 0
+أكثر سطوعاً و 1 أقل سطوعاً.</p>
+<p><em>عقوبة القدرة بسبب نسبة إطفاء محدودة</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mrow><mi>E</mi><mi>R</mi></mrow></msub><mo>=</mo><mn>10</mn><msub><mo>log</mo><mn>10</mn></msub><mfrac><mrow><mi>E</mi><mi>R</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>E</mi><mi>R</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow></mrow><annotation encoding="application/x-tex">\delta_{ER}=10\log_{10}\frac{ER+1}{ER-1}\ \ \mathrm{dB}</annotation></semantics></math></p>
+<p>عند ER = 20 dB العقوبة حوالي 0.1 dB، وعند 6 dB حوالي 2.2 dB.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Extinction ratio (dB)</td>
+<td>20 dB</td>
+<td>ER أعلى ← مستوى 0 أكثر عتمة ومستوى 1 أكثر سطوعاً (بنفس القدرة
+المتوسطة) ← فتحة عين أكبر و Q أعلى (عقوبة δ أصغر).</td>
+</tr>
+<tr class="even">
+<td>Insertion loss (dB)</td>
+<td>0 dB</td>
+<td>خسارة الإدخال تخفض الإشارة كلها بمقدار IL dB.</td>
+</tr>
+<tr class="odd">
+<td>Modulator bandwidth (GHz)</td>
+<td>35 GHz</td>
+<td>عرض نطاق المعدِّل يحدد سرعة تغيّر الضوء. القيم المنخفضة تدوّر النبضات
+(ISI).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="ar-nrz-line-coder">5.7 NRZ Line Coder</h3>
+<p>نبضات NRZ (لا عودة إلى الصفر). زمن الصعود يحدده مرشح غاوسي.</p>
+<p><em>المنافذ:</em> دخل: Bits (ثنائي); خرج: Drive (كهربائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>إشارة NRZ</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mi>k</mi></munder><msub><mi>a</mi><mi>k</mi></msub><mspace width="0.167em"></mspace><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>k</mi><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>a</mi><mi>k</mi></msub><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">v(t)=\sum_{k} a_k\,p(t-kT),\qquad a_k\in\{0,1\}</annotation></semantics></math></p>
+<p>p(t) نبضة مستطيلة عرضها T (البت كاملاً).</p>
+<p><em>مرشح المشغّل (زمن الصعود)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mfrac><mrow><mo>ln</mo><mn>2</mn></mrow><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>f</mi><msub><mi>f</mi><mi>d</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>f</mi><mi>d</mi></msub><mo>=</mo><mrow><mi mathvariant="normal">b</mi><mi mathvariant="normal">w</mi></mrow><mo>⋅</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">H(f)=\exp\!\left[-\frac{\ln 2}{2}\left(\frac{f}{f_d}\right)^{2}\right],\qquad f_d=\mathrm{bw}\cdot B</annotation></semantics></math></p>
+<p>f(d) هو عرض نطاق المشغّل عند −3 dB.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Driver bandwidth (× bit rate)</td>
+<td>0.8 × bit rate</td>
+<td>قيمة أصغر ← حواف أبطأ (زمن صعود أطول)، فتتداخل البتات (ISI) وتنغلق
+العين. قيمة أكبر ← حواف حادة لكن طيف أعرض.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="ar-bit-source-prbs">5.8 Bit Source (PRBS)</h3>
+<p>يولّد تسلسلاً شبه عشوائي من الأصفار والآحاد بمعدل البتات العام.</p>
+<p><em>المنافذ:</em> خرج: Bits (ثنائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>كثيرة حدود المولّد (الرتبة 9)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>x</mi><mn>9</mn></msup><mo>+</mo><msup><mi>x</mi><mn>5</mn></msup><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">x^{9}+x^{5}+1</annotation></semantics></math></p>
+<p>مسجّل إزاحة مع تغذية راجعة يولّد البتات، ويتكرر النمط بعد 2ⁿ − 1
+بت.</p>
+<p><em>طول النمط وزمن البت</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mrow><mi mathvariant="normal">P</mi><mi mathvariant="normal">R</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">S</mi></mrow></msub><mo>=</mo><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn><mo>,</mo><mspace width="2.0em"></mspace><mi>T</mi><mo>=</mo><mfrac><mn>1</mn><mi>B</mi></mfrac></mrow><annotation encoding="application/x-tex">L_{\mathrm{PRBS}}=2^{n}-1,\qquad T=\frac{1}{B}</annotation></semantics></math></p>
+<p>B هو معدل البتات (من إعدادات المخطط).</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PRBS order (2ⁿ−1)</td>
+<td>9</td>
+<td>الرتبة الأعلى تعطي نمطاً أطول فيه سلاسل أطول من الآحاد والأصفار (حتى
+n متتالية)، وهذه تختبر استجابة المستقبل للترددات المنخفضة. مع 512 بت
+تناسب الرتبة 9 (511 بت) نمطاً كاملاً واحداً.</td>
+</tr>
+<tr class="even">
+<td>Pattern</td>
+<td>Pseudo-random (PRBS)</td>
+<td>شبه عشوائي للوصلات العادية. Single 1 يعطي نبضة واحدة منفردة (لدراسة
+اتساع النبضة أو تشغيل الليزر). Alternating يعطي 1010… وهو أسرع نمط.</td>
+</tr>
+</tbody>
+</table></div>
+<p>معدل البتات B من إعدادات المخطط. زيادة B تجعل البت أقصر (T = 1/B)،
+فيغلق التشتت العين أسرع، ويحتاج المستقبل عرض نطاق أكبر (ضوضاء أكثر).</p>
+<p><strong>المصادر:</strong> ITU-T Recommendation O.150: Test patterns
+(PRBS) for digital transmission equipment. G. P. Agrawal, Fiber-Optic
+Communication Systems, Wiley.</p>
+<h3 id="ar-rate-equation-laser">5.9 Rate-Equation Laser</h3>
+<p>التيار I(t) = I_bias + I_mod·v(t) يقود معادلتي معدل الحاملات (N)
+والفوتونات (S). يُظهر العتبة وتأخر التشغيل والتذبذبات الاسترخائية والـ
+chirp.</p>
+<p><em>المنافذ:</em> دخل: Drive (كهربائي); خرج: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>معادلة معدل الحاملات</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>N</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>q</mi><mi>V</mi></mrow></mfrac><mo>−</mo><mfrac><mi>N</mi><msub><mi>τ</mi><mi>n</mi></msub></mfrac><mo>−</mo><mfrac><mrow><msub><mi>v</mi><mi>g</mi></msub><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>−</mo><msub><mi>N</mi><mrow><mi>t</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mi>ε</mi><mi>S</mi></mrow></mfrac><mspace width="0.167em"></mspace><mi>S</mi></mrow><annotation encoding="application/x-tex">\frac{dN}{dt}=\frac{I(t)}{qV}-\frac{N}{\tau_n}-\frac{v_g a (N-N_{tr})}{1+\varepsilon S}\,S</annotation></semantics></math></p>
+<p>N كثافة الحاملات، و I = I(bias) + I(mod)·v(t).</p>
+<p><em>معادلة معدل الفوتونات</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>S</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>Γ</mi><mfrac><mrow><msub><mi>v</mi><mi>g</mi></msub><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>−</mo><msub><mi>N</mi><mrow><mi>t</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mn>1</mn><mo>+</mo><mi>ε</mi><mi>S</mi></mrow></mfrac><mspace width="0.167em"></mspace><mi>S</mi><mo>−</mo><mfrac><mi>S</mi><msub><mi>τ</mi><mi>p</mi></msub></mfrac><mo>+</mo><mi>Γ</mi><mi>β</mi><mfrac><mi>N</mi><msub><mi>τ</mi><mi>n</mi></msub></mfrac></mrow><annotation encoding="application/x-tex">\frac{dS}{dt}=\Gamma\frac{v_g a (N-N_{tr})}{1+\varepsilon S}\,S-\frac{S}{\tau_p}+\Gamma\beta\frac{N}{\tau_n}</annotation></semantics></math></p>
+<p>S كثافة الفوتونات. الحد الأخير هو الانبعاث التلقائي الذي يبدأ
+الليزر.</p>
+<p><em>الطور (chirp)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>φ</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mi>α</mi><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">[</mo><mi>Γ</mi><msub><mi>v</mi><mi>g</mi></msub><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>−</mo><msub><mi>N</mi><mrow><mi>t</mi><mi>r</mi></mrow></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mfrac><mn>1</mn><msub><mi>τ</mi><mi>p</mi></msub></mfrac><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\frac{d\varphi}{dt}=\frac{\alpha}{2}\left[\Gamma v_g a (N-N_{tr})-\frac{1}{\tau_p}\right]</annotation></semantics></math></p>
+<p>α يحوّل كل تغيّر في N إلى تغيّر في التردد (chirp عابر و chirp ثابت).</p>
+<p><em>العتبة والقدرة الخارجة</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mrow><mi>t</mi><mi>h</mi></mrow></msub><mo>=</mo><mfrac><mrow><mi>q</mi><mi>V</mi></mrow><msub><mi>τ</mi><mi>n</mi></msub></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>N</mi><mrow><mi>t</mi><mi>r</mi></mrow></msub><mo>+</mo><mfrac><mn>1</mn><mrow><mi>Γ</mi><msub><mi>v</mi><mi>g</mi></msub><mi>a</mi><msub><mi>τ</mi><mi>p</mi></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mi>P</mi><mo>=</mo><mfrac><mrow><mi>η</mi><mspace width="0.167em"></mspace><mi>h</mi><mi>ν</mi><mspace width="0.167em"></mspace><mi>V</mi></mrow><mrow><mn>2</mn><mi>Γ</mi><msub><mi>τ</mi><mi>p</mi></msub></mrow></mfrac><mspace width="0.167em"></mspace><mi>S</mi></mrow><annotation encoding="application/x-tex">I_{th}=\frac{qV}{\tau_n}\left(N_{tr}+\frac{1}{\Gamma v_g a\tau_p}\right),\qquad P=\frac{\eta\,h\nu\,V}{2\Gamma\tau_p}\,S</annotation></semantics></math></p>
+<p>قيم ثابتة للجهاز: V = 1.5×10⁻¹⁰ cm³، v(g) = 8.5×10⁹ cm/s، a =
+2.5×10⁻¹⁶ cm²، Nₜᵣ = 10¹⁸ cm⁻³، Γ = 0.4، β = 3×10⁻⁵. مع القيم الافتراضية
+Iₜₕ ≈ 33.5 mA.</p>
+<p><em>تأخر التشغيل (انحياز تحت العتبة)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mi>d</mi></msub><mo>≈</mo><msub><mi>τ</mi><mi>n</mi></msub><mo>ln</mo><mfrac><msub><mi>I</mi><mrow><mi>m</mi><mi>o</mi><mi>d</mi></mrow></msub><mrow><msub><mi>I</mi><mrow><mi>m</mi><mi>o</mi><mi>d</mi></mrow></msub><mo>+</mo><msub><mi>I</mi><mrow><mi>b</mi><mi>i</mi><mi>a</mi><mi>s</mi></mrow></msub><mo>−</mo><msub><mi>I</mi><mrow><mi>t</mi><mi>h</mi></mrow></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">t_d\approx\tau_n\ln\frac{I_{mod}}{I_{mod}+I_{bias}-I_{th}}</annotation></semantics></math></p>
+<p>الانحياز عند العتبة أو فوقها يزيل التأخر.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bias current (mA)</td>
+<td>40 mA</td>
+<td>تيار الانحياز. تحت Iₜₕ ينطفئ الليزر بين النبضات: تأخر تشغيل وقمة
+أولى قوية. فوق Iₜₕ لا يكون مستوى 0 مظلماً (نسبة إطفاء أقل) ويظهر chirp
+ثابت.</td>
+</tr>
+<tr class="even">
+<td>Modulation peak current (mA)</td>
+<td>20 mA</td>
+<td>التيار المضاف للبت 1. قيمة أكبر تعطي قدرة أكبر و chirp أكبر.</td>
+</tr>
+<tr class="odd">
+<td>Wavelength (nm)</td>
+<td>1550 nm</td>
+<td>الطول الموجي للانبعاث.</td>
+</tr>
+<tr class="even">
+<td>Carrier lifetime τn (ns)</td>
+<td>1 ns</td>
+<td>عمر الحاملات. τn أطول يعطي تأخر تشغيل أطول (وعتبة أقل).</td>
+</tr>
+<tr class="odd">
+<td>Photon lifetime τp (ps)</td>
+<td>3 ps</td>
+<td>عمر الفوتونات. يحدد العتبة (τp أقصر ← Iₜₕ أعلى) وسرعة التذبذبات
+الاسترخائية.</td>
+</tr>
+<tr class="even">
+<td>Linewidth factor α</td>
+<td>5</td>
+<td>معامل تعزيز عرض الخط. α = 0 يزيل الـ chirp.</td>
+</tr>
+<tr class="odd">
+<td>Gain compression ε (×10⁻¹⁷ cm³)</td>
+<td>1 ×10⁻¹⁷ cm³</td>
+<td>انضغاط الكسب. يخمد التذبذبات الاسترخائية ويخفض القمة الأولى.</td>
+</tr>
+<tr class="even">
+<td>Output efficiency η</td>
+<td>0.4</td>
+<td>الكفاءة الخارجية (التفاضلية). تغيّر القدرة: الميل ≈ η·hν/(2q) ≈ 0.16
+W/A عندما η = 0.4.</td>
+</tr>
+</tbody>
+</table></div>
+<p>تُحل المعادلات بطريقة Runge–Kutta من الرتبة الرابعة (خطوة ≤ 0.25 ps).
+لرؤية تفاصيل الـ chirp السريعة استعمل عدد عينات كبيراً لكل بت (128 أو
+أكثر). لا توجد ضوضاء ليزر في هذا النموذج.</p>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. L. A. Coldren, S. W. Corzine, Diode Lasers and Photonic
+Integrated Circuits, Wiley.</p>
+<h3 id="ar-rz-line-coder">5.10 RZ Line Coder</h3>
+<p>نبضات RZ (عودة إلى الصفر): البت 1 يبقى مرتفعاً لجزء من زمن البت فقط
+(نسبة العمل).</p>
+<p><em>المنافذ:</em> دخل: Bits (ثنائي); خرج: Drive (كهربائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>إشارة RZ</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mi>k</mi></munder><msub><mi>a</mi><mi>k</mi></msub><mspace width="0.167em"></mspace><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>k</mi><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">f</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi></mrow><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mn>0</mn><mo>≤</mo><mi>t</mi><mo>&lt;</mo><mi>d</mi><mi>T</mi></mrow><annotation encoding="application/x-tex">v(t)=\sum_{k} a_k\,p(t-kT),\qquad p(t)=1\ \ \mathrm{for}\ \ 0\le t&lt; dT</annotation></semantics></math></p>
+<p>d هي نسبة العمل. البت 1 يعود إلى الصفر قبل نهاية البت.</p>
+<p><em>مرشح المشغّل</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mfrac><mrow><mo>ln</mo><mn>2</mn></mrow><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>f</mi><msub><mi>f</mi><mi>d</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>f</mi><mi>d</mi></msub><mo>=</mo><mrow><mi mathvariant="normal">b</mi><mi mathvariant="normal">w</mi></mrow><mo>⋅</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">H(f)=\exp\!\left[-\frac{\ln 2}{2}\left(\frac{f}{f_d}\right)^{2}\right],\qquad f_d=\mathrm{bw}\cdot B</annotation></semantics></math></p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Duty cycle (bit)</td>
+<td>0.5 bit</td>
+<td>نسبة عمل أقصر تعطي نبضات أقصر: طيف أعرض (تشتت أكبر) لكن مسافة أكبر
+بين النبضات (تداخل أقل). ولنفس القدرة المتوسطة تكون القدرة القصوى
+أعلى.</td>
+</tr>
+<tr class="even">
+<td>Driver bandwidth (× bit rate)</td>
+<td>1.6 × bit rate</td>
+<td>كما في NRZ: عرض النطاق المنخفض يدوّر النبضات. RZ يحتاج تقريباً ضعف عرض
+نطاق NRZ.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h2 id="ar-الألياف-الضوئية-optical-fibers">6. الألياف الضوئية (Optical
+fibers)</h2>
+<h3 id="ar-fiber-span">6.1 Fiber Span</h3>
+<p>خسارة αL بالـ dB ثم تشتت D·L. إشارات الليزر (مترابطة): H(f) =
+exp(jπDLλ²f²/c). LED/FP: اتساع النبضة Δτ = |D|LΔλ.</p>
+<p><em>المنافذ:</em> دخل: Input (ضوئي); خرج: Output (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>الخسارة</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mi>α</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">P_{\mathrm{out}}\,[\mathrm{dBm}]=P_{\mathrm{in}}\,[\mathrm{dBm}]-\alpha L</annotation></semantics></math></p>
+<p>α بوحدة dB/km و L بالكيلومتر.</p>
+<p><em>تشتت الليف القياسي (G.652)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><msub><mi>S</mi><mn>0</mn></msub><mn>4</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo>−</mo><mfrac><msubsup><mi>λ</mi><mn>0</mn><mn>4</mn></msubsup><msup><mi>λ</mi><mn>3</mn></msup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">D(\lambda)=\frac{S_0}{4}\left(\lambda-\frac{\lambda_0^{4}}{\lambda^{3}}\right)</annotation></semantics></math></p>
+<p>λ₀ = 1312 nm و S₀ = 0.092 ps/(nm²·km).</p>
+<p><em>التشتت على إشارة ليزر (المجال)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>j</mi><mspace width="0.167em"></mspace><mfrac><mrow><mi>π</mi><mi>D</mi><mi>L</mi><msup><mi>λ</mi><mn>2</mn></msup></mrow><mi>c</mi></mfrac><mspace width="0.167em"></mspace><msup><mi>f</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H(f)=\exp\!\left(j\,\frac{\pi D L \lambda^{2}}{c}\,f^{2}\right)</annotation></semantics></math></p>
+<p>يُطبَّق على إشارات DFB و DML و MZM، فيعمل الـ chirp والتشتت معاً.</p>
+<p><em>المصادر العريضة والليف متعدد الأنماط</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>τ</mi><mo>=</mo><msqrt><mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>D</mi><mo stretchy="true" form="postfix">|</mo></mrow><mi>L</mi><mi>Δ</mi><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><mi>Δ</mi><msubsup><mi>τ</mi><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow><mn>2</mn></msubsup></mrow></msqrt><mo>,</mo><mspace width="2.0em"></mspace><mi>Δ</mi><msub><mi>τ</mi><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub><mo>=</mo><mfrac><mrow><mn>0.44</mn><mspace width="0.167em"></mspace><mi>L</mi></mrow><mrow><mi>B</mi><msub><mi>W</mi><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Delta\tau=\sqrt{\left(|D|L\Delta\lambda\right)^{2}+\Delta\tau_{\mathrm{modal}}^{2}},\qquad \Delta\tau_{\mathrm{modal}}=\frac{0.44\,L}{BW_{\mathrm{modal}}}</annotation></semantics></math></p>
+<p>اتساع غاوسي لشدة الضوء (FWHM).</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fiber type</td>
+<td>Single-mode (G.652)</td>
+<td>يحدد القيم التلقائية: SMF بخسارة 2.0 / 0.35 / 0.2 dB/km عند 850 /
+1310 / 1550 nm و D من G.652؛ MMF بخسارة 2.5 dB/km عند 850 nm؛ DCF بخسارة
+0.5 dB/km و D = −100 ps/(nm·km).</td>
+</tr>
+<tr class="even">
+<td>Length (km)</td>
+<td>20 km</td>
+<td>الخسارة تزداد كـ αL (dB)، والتشتت يزداد كـ DL (ps/nm).</td>
+</tr>
+<tr class="odd">
+<td>Attenuation (dB/km)</td>
+<td>Auto</td>
+<td>ألغِ Auto لتضع قيمة α بنفسك.</td>
+</tr>
+<tr class="even">
+<td>Dispersion (ps/(nm·km))</td>
+<td>Auto</td>
+<td>ألغِ Auto لتضع D بنفسك. D السالب (DCF) يلغي D الموجب لليف SMF: L(DCF)
+= D(SMF)·L(SMF) / |D(DCF)|.</td>
+</tr>
+<tr class="odd">
+<td>Modal bandwidth (MHz·km)</td>
+<td>2000 MHz·km</td>
+<td>لليف متعدد الأنماط فقط. عرض نطاق أنماطي أعلى ← تشتت أنماطي أقل.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill. G. P. Agrawal, Fiber-Optic Communication Systems, Wiley.
+ITU-T Recommendation G.652: Characteristics of a single-mode optical
+fibre and cable.</p>
+<h2 id="ar-المضخمات-والمكونات-المنفعلة-amplifiers-and-passive">7.
+المضخمات والمكونات المنفعلة (Amplifiers and passive)</h2>
+<h3 id="ar-variable-attenuator">7.1 Variable Attenuator</h3>
+<p>يخفض القدرة الضوئية بعدد محدد من الـ dB (والضوضاء تنخفض بالمقدار
+نفسه).</p>
+<p><em>المنافذ:</em> دخل: Input (ضوئي); خرج: Output (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>التوهين</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">P_{\mathrm{out}}\,[\mathrm{dBm}]=P_{\mathrm{in}}\,[\mathrm{dBm}]-A</annotation></semantics></math></p>
+<p>الإشارة وضوضاء ASE تنخفضان بالمقدار نفسه، فيبقى OSNR كما هو.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Attenuation (dB)</td>
+<td>10 dB</td>
+<td>يحدد القدرة المستقبلة. يُستخدم لقياس حساسية المستقبل (القدرة التي
+يكون عندها Q = 6).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="ar-erbium-fiber-amplifier-edfa">7.2 Erbium Fiber Amplifier
+(EDFA)</h3>
+<p>مضخم ليفي مُطعَّم بالإربيوم. تحكم بالربح أو بالقدرة. يضيف ضوضاء ASE.
+قاعدة OSNR في الكتب: 58 + Pin − NF، وفي هذا المحاكي أعلى منها بـ 3 dB
+لأنه يحسب استقطاباً واحداً.</p>
+<p><em>المنافذ:</em> دخل: Input (ضوئي); خرج: Output (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>الربح</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi></mrow></msub><mo>−</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">G\,[\mathrm{dB}]=P_{\mathrm{out}}-P_{\mathrm{in}}</annotation></semantics></math></p>
+<p>في وضع التحكم بالقدرة يُختار G بحيث يساوي Pₒᵤₜ القيمة التي تضعها.</p>
+<p><em>ضوضاء ASE</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">E</mi></mrow></msub><mo>=</mo><msub><mi>n</mi><mrow><mi>s</mi><mi>p</mi></mrow></msub><mspace width="0.167em"></mspace><mi>h</mi><mi>ν</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>G</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>n</mi><mrow><mi>s</mi><mi>p</mi></mrow></msub><mo>≈</mo><mfrac><mi>F</mi><mn>2</mn></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>F</mi><mo>=</mo><msup><mn>10</mn><mrow><mi>N</mi><mi>F</mi><mi>/</mi><mn>10</mn></mrow></msup></mrow><annotation encoding="application/x-tex">S_{\mathrm{ASE}}=n_{sp}\,h\nu\,(G-1),\qquad n_{sp}\approx\frac{F}{2},\quad F=10^{NF/10}</annotation></semantics></math></p>
+<p>تُضاف كضوضاء غاوسية إلى المجال (باستقطاب الإشارة)، ثم يمر الضوء بمرشح
+ضوئي غاوسي.</p>
+<p><em>OSNR (في 0.1 nm)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">N</mi><mi mathvariant="normal">R</mi></mrow><mo>≈</mo><mn>58</mn><mo>+</mo><msub><mi>P</mi><mrow><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi></mrow></msub><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>−</mo><mi>N</mi><mi>F</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{OSNR}\approx 58+P_{\mathrm{in}}\,[\mathrm{dBm}]-NF\,[\mathrm{dB}]</annotation></semantics></math></p>
+<p>قاعدة الكتب (للاستقطابين). هذا المحاكي يحسب استقطاباً واحداً، لذا يكون
+OSNR فيه أعلى بحوالي 3 dB.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Operation mode</td>
+<td>Gain control</td>
+<td>تحكم بالربح: G ثابت. تحكم بالقدرة: قدرة خرج ثابتة (والربح يتغير مع
+الدخل).</td>
+</tr>
+<tr class="even">
+<td>Gain (dB)</td>
+<td>20 dB</td>
+<td>يرفع الإشارة فوق الضوضاء الحرارية للمستقبل. لكن زيادة الربح لا تحسّن
+OSNR.</td>
+</tr>
+<tr class="odd">
+<td>Output power (dBm)</td>
+<td>-8 dBm</td>
+<td>قدرة الخرج في وضع التحكم بالقدرة.</td>
+</tr>
+<tr class="even">
+<td>Noise figure (dB)</td>
+<td>5 dB</td>
+<td>كل زيادة 1 dB في NF ← نقص 1 dB في OSNR.</td>
+</tr>
+<tr class="odd">
+<td>Optical filter bandwidth (GHz)</td>
+<td>50 GHz</td>
+<td>مرشح ضوئي أضيق يزيل ضوضاء ASE أكثر (Q أفضل). وإن كان ضيقاً جداً يقطع
+طيف الإشارة.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> E. Desurvire, Erbium-Doped Fiber
+Amplifiers: Principles and Applications, Wiley, 1994. R. Ramaswami, K.
+N. Sivarajan, G. H. Sasaki, Optical Networks: A Practical Perspective,
+Morgan Kaufmann. G. P. Agrawal, Fiber-Optic Communication Systems,
+Wiley.</p>
+<h3 id="ar-optical-coupler-12">7.3 Optical Coupler 1×2</h3>
+<p>يرسل جزءاً من الضوء إلى الخرج 1 والباقي إلى الخرج 2، مع خسارة إضافية
+صغيرة.</p>
+<p><em>المنافذ:</em> دخل: Input (ضوئي); خرج: Output 1 (ضوئي); خرج:
+Output 2 (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>قدرات الخرج</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mn>1</mn></msub><mo>=</mo><mi>r</mi><mspace width="0.167em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><msup><mn>10</mn><mrow><mo>−</mo><mi>E</mi><mi>L</mi><mi>/</mi><mn>10</mn></mrow></msup><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>P</mi><mn>2</mn></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo stretchy="true" form="postfix">)</mo></mrow><mspace width="0.167em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><msup><mn>10</mn><mrow><mo>−</mo><mi>E</mi><mi>L</mi><mi>/</mi><mn>10</mn></mrow></msup></mrow><annotation encoding="application/x-tex">P_1=r\,P\,10^{-EL/10},\qquad P_2=(1-r)\,P\,10^{-EL/10}</annotation></semantics></math></p>
+<p>r = 50% يعطي تقسيماً بمقدار 3 dB.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Power to output 1 (%)</td>
+<td>50 %</td>
+<td>حصة الخرج 1 من القدرة (r). المقسِّم 50/50 يكلّف 3 dB على كل خرج.</td>
+</tr>
+<tr class="even">
+<td>Excess loss (dB)</td>
+<td>0.2 dB</td>
+<td>الخسارة الإضافية EL لمقسِّم حقيقي.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h2 id="ar-المستقبلات-receivers">8. المستقبلات (Receivers)</h2>
+<h3 id="ar-avalanche-photodiode-apd">8.1 Avalanche Photodiode (APD)</h3>
+<p>I = M·R·P. ضوضاء الطلقات تنمو كـ M²F: σ²shot = 2qM²F·RP·Bn. الضوضاء
+الحرارية لا تتغير، لذا يفيد M متوسط.</p>
+<p><em>المنافذ:</em> دخل: Optical (ضوئي); خرج: Current (كهربائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>التيار مع الربح</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>=</mo><mi>M</mi><mi>R</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">I=M R P</annotation></semantics></math></p>
+<p><em>ضوضاء الطلقات مع الضوضاء الزائدة</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>σ</mi><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">h</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">t</mi></mrow><mn>2</mn></msubsup><mo>=</mo><mn>2</mn><mi>q</mi><mspace width="0.167em"></mspace><msup><mi>M</mi><mn>2</mn></msup><mi>F</mi><mspace width="0.167em"></mspace><mi>R</mi><mi>P</mi><mspace width="0.167em"></mspace><msub><mi>B</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">\sigma_{\mathrm{shot}}^{2}=2q\,M^{2}F\,RP\,B_n</annotation></semantics></math></p>
+<p>الضوضاء الحرارية σₜₕ = iₙ√Bₙ لا تُضرب في M.</p>
+<p><em>معامل الضوضاء الزائدة</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mi>k</mi><mi>M</mi><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>−</mo><mfrac><mn>1</mn><mi>M</mi></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">F=kM+(1-k)\left(2-\frac{1}{M}\right)</annotation></semantics></math></p>
+<p>k نسبة التأين (k الصغير أفضل).</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gain M</td>
+<td>10</td>
+<td>M يرفع الإشارة فوق الضوضاء الحرارية، لكن ضوضاء الطلقات تنمو كـ M²F.
+لذلك لـ Q قيمة عظمى عند M أمثل (حوالي 15–20 عندما k = 0.5).</td>
+</tr>
+<tr class="even">
+<td>Ionization ratio k</td>
+<td>0.5</td>
+<td>k أصغر ← F أصغر ← M أمثل أعلى و Q أعلى.</td>
+</tr>
+<tr class="odd">
+<td>Quantum efficiency η</td>
+<td>0.8</td>
+<td>الكفاءة الكمّية (كما في PIN).</td>
+</tr>
+<tr class="even">
+<td>Thermal noise (pA/√Hz)</td>
+<td>20 pA/√Hz</td>
+<td>الضوضاء الحرارية للمضخم بعد الـ APD.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> R. J. McIntyre, “Multiplication noise in
+uniform avalanche diodes,” IEEE Trans. Electron Devices, 1966. G.
+Keiser, Optical Fiber Communications, McGraw-Hill. G. P. Agrawal,
+Fiber-Optic Communication Systems, Wiley.</p>
+<h3 id="ar-bessel-low-pass-filter">8.2 Bessel Low-Pass Filter</h3>
+<p>مرشح Bessel منخفض التمرير من الدرجة الرابعة (مرشح المستقبل المعتاد).
+تردد القطع ≈ 0.75 × معدل البتات.</p>
+<p><em>المنافذ:</em> دخل: Input (كهربائي); خرج: Output (كهربائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>مرشح Bessel من الدرجة الرابعة</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>s</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>105</mn><mrow><msup><mi>s</mi><mn>4</mn></msup><mo>+</mo><mn>10</mn><msup><mi>s</mi><mn>3</mn></msup><mo>+</mo><mn>45</mn><msup><mi>s</mi><mn>2</mn></msup><mo>+</mo><mn>105</mn><mi>s</mi><mo>+</mo><mn>105</mn></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>s</mi><mo>=</mo><mi>j</mi><mspace width="0.167em"></mspace><mn>2.114</mn><mspace width="0.167em"></mspace><mfrac><mi>f</mi><msub><mi>f</mi><mi>c</mi></msub></mfrac></mrow><annotation encoding="application/x-tex">H(s)=\frac{105}{s^{4}+10s^{3}+45s^{2}+105s+105},\qquad s=j\,2.114\,\frac{f}{f_c}</annotation></semantics></math></p>
+<p>مرشحات Bessel لها تأخير شبه ثابت، فتحافظ على شكل النبضة. التأخير
+الثابت مُزال.</p>
+<p><em>عرض نطاق الضوضاء</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>n</mi></msub><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mspace width="0.167em"></mspace><mi>d</mi><mi>f</mi><mo>≈</mo><mn>1.1</mn><mspace width="0.167em"></mspace><msub><mi>f</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">B_n=\int_{0}^{\infty}|H(f)|^{2}\,df\approx 1.1\,f_c</annotation></semantics></math></p>
+<p>تُضاف ضوضاء المستقبل لهذا العرض.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cut-off frequency (× bit rate)</td>
+<td>0.75 × bit rate</td>
+<td>f(c) أقل ← ضوضاء أقل لكن ISI أكثر. f(c) أعلى ← نبضات أحدّ لكن ضوضاء
+أكثر. الاختيار المعتاد حوالي 0.75 × معدل البتات.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> W. E. Thomson, “Delay networks having
+maximally flat frequency characteristics,” Proc. IEE, 1949. G. P.
+Agrawal, Fiber-Optic Communication Systems, Wiley. G. Keiser, Optical
+Fiber Communications, McGraw-Hill.</p>
+<h3 id="ar-gaussian-low-pass-filter">8.3 Gaussian Low-Pass Filter</h3>
+<p>مرشح غاوسي منخفض التمرير. يضيف ضوضاء المستقبل المعلّقة لعرض نطاق ضوضاء
+Bn ≈ 1.06·fc.</p>
+<p><em>المنافذ:</em> دخل: Input (كهربائي); خرج: Output (كهربائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>المرشح الغاوسي</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mo>exp</mo><mspace width="-0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mfrac><mrow><mo>ln</mo><mn>2</mn></mrow><mn>2</mn></mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>f</mi><msub><mi>f</mi><mi>c</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>B</mi><mi>n</mi></msub><mo>≈</mo><mn>1.06</mn><mspace width="0.167em"></mspace><msub><mi>f</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">H(f)=\exp\!\left[-\frac{\ln 2}{2}\left(\frac{f}{f_c}\right)^{2}\right],\qquad B_n\approx 1.06\,f_c</annotation></semantics></math></p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cut-off frequency (× bit rate)</td>
+<td>0.75 × bit rate</td>
+<td>نفس الموازنة في مرشح Bessel: الضوضاء مقابل التداخل بين الرموز.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h3 id="ar-pin-photodiode">8.4 PIN Photodiode</h3>
+<p>I = R·P حيث R = ηqλ/hc. الضوضاء: σ²shot = 2qRP·Bn و σth = in·√Bn
+(يضيفها المرشح منخفض التمرير).</p>
+<p><em>المنافذ:</em> دخل: Optical (ضوئي); خرج: Current (كهربائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>الاستجابية والتيار</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mfrac><mrow><mi>η</mi><mi>q</mi><mi>λ</mi></mrow><mrow><mi>h</mi><mi>c</mi></mrow></mfrac><mo>≈</mo><mfrac><mrow><mi>η</mi><mspace width="0.167em"></mspace><mi>λ</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>μ</mi><mi mathvariant="normal">m</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><mn>1.24</mn></mfrac><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">/</mi><mi mathvariant="normal">W</mi></mrow><mo>,</mo><mspace width="2.0em"></mspace><mi>I</mi><mo>=</mo><mi>R</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">R=\frac{\eta q\lambda}{hc}\approx\frac{\eta\,\lambda[\mu\mathrm{m}]}{1.24}\ \mathrm{A/W},\qquad I=RP</annotation></semantics></math></p>
+<p>حوالي 1 A/W عند 1550 nm عندما η = 0.8.</p>
+<p><em>الضوضاء (يضيفها المرشح منخفض التمرير)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>σ</mi><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">h</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">t</mi></mrow><mn>2</mn></msubsup><mo>=</mo><mn>2</mn><mi>q</mi><mi>I</mi><mspace width="0.167em"></mspace><msub><mi>B</mi><mi>n</mi></msub><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>σ</mi><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">h</mi></mrow></msub><mo>=</mo><msub><mi>i</mi><mi>n</mi></msub><msqrt><msub><mi>B</mi><mi>n</mi></msub></msqrt></mrow><annotation encoding="application/x-tex">\sigma_{\mathrm{shot}}^{2}=2qI\,B_n,\qquad \sigma_{\mathrm{th}}=i_n\sqrt{B_n}</annotation></semantics></math></p>
+<p>Bₙ هو عرض نطاق الضوضاء للمرشح بعد الكاشف.</p>
+<p><em>كثافة الضوضاء الحرارية</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>i</mi><mi>n</mi></msub><mo>=</mo><msqrt><mfrac><mrow><mn>4</mn><mi>k</mi><mi>T</mi></mrow><msub><mi>R</mi><mi>L</mi></msub></mfrac></msqrt></mrow><annotation encoding="application/x-tex">i_n=\sqrt{\frac{4kT}{R_L}}</annotation></semantics></math></p>
+<p>القيمة iₙ = 20 pA/√Hz نموذجية لمستقبل 10 Gb/s.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Quantum efficiency η</td>
+<td>0.8</td>
+<td>η أعلى ← تيار أكبر للضوء نفسه ← حساسية أفضل.</td>
+</tr>
+<tr class="even">
+<td>Thermal noise (pA/√Hz)</td>
+<td>20 pA/√Hz</td>
+<td>الضوضاء الحرارية هي الغالبة في مستقبل PIN: iₙ أقل ← حساسية
+أفضل.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill. G. P. Agrawal, Fiber-Optic Communication Systems,
+Wiley.</p>
+<h2 id="ar-أجهزة-العرض-visualizers">9. أجهزة العرض (Visualizers)</h2>
+<h3 id="ar-eye-ber-meter">9.1 Eye &amp; BER Meter</h3>
+<p>يجد أفضل لحظة لأخذ العينة ويقيس Q = (I1 − I0)/(σ1 + σ0) و BER = ½
+erfc(Q/√2) ومخطط العين.</p>
+<p><em>المنافذ:</em> دخل: Electrical (كهربائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>معامل Q</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mfrac><mrow><msub><mi>I</mi><mn>1</mn></msub><mo>−</mo><msub><mi>I</mi><mn>0</mn></msub></mrow><mrow><msub><mi>σ</mi><mn>1</mn></msub><mo>+</mo><msub><mi>σ</mi><mn>0</mn></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">Q=\frac{I_1-I_0}{\sigma_1+\sigma_0}</annotation></semantics></math></p>
+<p>متوسطات مستويي 1 و 0 وانحرافاتهما المعيارية عند أفضل لحظة لأخذ
+العينة.</p>
+<p><em>معدل خطأ البت</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">B</mi><mi mathvariant="normal">E</mi><mi mathvariant="normal">R</mi></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>erfc</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mi>Q</mi><msqrt><mn>2</mn></msqrt></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{BER}=\frac{1}{2}\operatorname{erfc}\left(\frac{Q}{\sqrt{2}}\right)</annotation></semantics></math></p>
+<p>Q = 6 ← BER ≈ 10⁻⁹. و Q = 7 ← BER ≈ 10⁻¹².</p>
+<p><em>أفضل عتبة قرار وارتفاع العين</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mi>D</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>σ</mi><mn>0</mn></msub><msub><mi>I</mi><mn>1</mn></msub><mo>+</mo><msub><mi>σ</mi><mn>1</mn></msub><msub><mi>I</mi><mn>0</mn></msub></mrow><mrow><msub><mi>σ</mi><mn>0</mn></msub><mo>+</mo><msub><mi>σ</mi><mn>1</mn></msub></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>H</mi><mrow><mi mathvariant="normal">e</mi><mi mathvariant="normal">y</mi><mi mathvariant="normal">e</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>I</mi><mn>1</mn></msub><mo>−</mo><mn>3</mn><msub><mi>σ</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>I</mi><mn>0</mn></msub><mo>+</mo><mn>3</mn><msub><mi>σ</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">I_D=\frac{\sigma_0 I_1+\sigma_1 I_0}{\sigma_0+\sigma_1},\qquad H_{\mathrm{eye}}=(I_1-3\sigma_1)-(I_0+3\sigma_0)</annotation></semantics></math></p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bits drawn in the eye</td>
+<td>300</td>
+<td>يغيّر فقط عدد البتات المرسومة في مخطط العين، ولا يغيّر Q.</td>
+</tr>
+</tbody>
+</table></div>
+<p>يجرب المحلّل كل لحظات أخذ العينة خلال فترتي بت، ويختار اللحظة ذات أعلى
+Q (الرسم «Q factor against sampling time»).</p>
+<p><strong>المصادر:</strong> S. D. Personick, “Receiver design for
+digital fiber optic communication systems,” Bell Syst. Tech. J., 1973.
+G. P. Agrawal, Fiber-Optic Communication Systems, Wiley. G. Keiser,
+Optical Fiber Communications, McGraw-Hill.</p>
+<h3 id="ar-electrical-spectrum-monitor">9.2 Electrical Spectrum
+Monitor</h3>
+<p>يعرض طيف القدرة |X(f)|² لإشارة كهربائية مقابل التردد (جانب واحد، من 0
+إلى f_max).</p>
+<p><em>المنافذ:</em> دخل: Electrical (كهربائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>طيف القدرة</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mn>2</mn><mspace width="0.167em"></mspace><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>X</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup></mrow><msup><mi>N</mi><mn>2</mn></msup></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mn>10</mn><msub><mo>log</mo><mn>10</mn></msub><mfrac><mrow><mi>S</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><mn>50</mn><mspace width="0.167em"></mspace><mi>Ω</mi></mrow><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">W</mi></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">S(f)=\frac{2\,|X(f)|^{2}}{N^{2}},\qquad P\,[\mathrm{dBm}]=10\log_{10}\frac{S(f)\cdot 50\,\Omega}{1\ \mathrm{mW}}</annotation></semantics></math></p>
+<p>X(f) هو FFT للإشارة (بعد طرح المتوسط). إشارات التيار تُعرض كقدرة على
+50 Ω، وإشارات الدفع نسبةً إلى القمة.</p>
+<p><em>أصفار طيف NRZ و RZ</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">R</mi><mi mathvariant="normal">Z</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∝</mo><msup><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">c</mi></mrow><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>S</mi><mrow><mi mathvariant="normal">R</mi><mi mathvariant="normal">Z</mi></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∝</mo><msup><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">c</mi></mrow><mn>2</mn></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mspace width="0.167em"></mspace><mi>d</mi><mi>T</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">S_{\mathrm{NRZ}}(f)\propto \mathrm{sinc}^{2}(fT),\qquad S_{\mathrm{RZ}}(f)\propto \mathrm{sinc}^{2}(f\,dT)</annotation></semantics></math></p>
+<p>أول صفر عند f = B لـ NRZ وعند f = B/d لـ RZ (d نسبة العمل): RZ يحتاج
+تقريباً ضعف عرض النطاق.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frequency span (× bit rate)</td>
+<td>4 × bit rate</td>
+<td>أعلى تردد معروض، كمضاعف لمعدل البتات.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley. G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="ar-optical-spectrum-monitor">9.3 Optical Spectrum Monitor</h3>
+<p>الطيف الضوئي (dBm ضمن عرض نطاق الدقة). يعرض OSNR عندما يكون قبله
+EDFA.</p>
+<p><em>المنافذ:</em> دخل: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>الطيف</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>λ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>∑</mo><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>f</mi><mo>−</mo><msub><mi>f</mi><mi>λ</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>&lt;</mo><mi>R</mi><mi>B</mi><mi>W</mi><mi>/</mi><mn>2</mn></mrow></munder><mfrac><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><msup><mi>N</mi><mn>2</mn></msup></mfrac><mo>,</mo><mspace width="2.0em"></mspace><mi>Δ</mi><mi>λ</mi><mo>=</mo><mfrac><msup><mi>λ</mi><mn>2</mn></msup><mi>c</mi></mfrac><mspace width="0.167em"></mspace><mi>Δ</mi><mi>f</mi></mrow><annotation encoding="application/x-tex">P(\lambda)=\sum_{|f-f_\lambda|&lt;RBW/2}\frac{|E(f)|^{2}}{N^{2}},\qquad \Delta\lambda=\frac{\lambda^{2}}{c}\,\Delta f</annotation></semantics></math></p>
+<p>القدرة ضمن عرض نطاق الدقة حول كل طول موجي (مرشح دقة غاوسي).</p>
+<p><em>OSNR</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">O</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">N</mi><mi mathvariant="normal">R</mi></mrow><mo>=</mo><mn>10</mn><msub><mo>log</mo><mn>10</mn></msub><mfrac><msub><mi>P</mi><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">g</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub><mrow><msub><mi>S</mi><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">E</mi></mrow></msub><mo>⋅</mo><mn>12.5</mn><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">G</mi><mi mathvariant="normal">H</mi><mi mathvariant="normal">z</mi></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\mathrm{OSNR}=10\log_{10}\frac{P_{\mathrm{signal}}}{S_{\mathrm{ASE}}\cdot 12.5\ \mathrm{GHz}}</annotation></semantics></math></p>
+<p>12.5 GHz = 0.1 nm عند 1550 nm.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Resolution bandwidth filter</td>
+<td>On</td>
+<td>On: القدرة ضمن عرض نطاق الدقة (كجهاز OSA حقيقي). Off: قدرة كل خانة
+FFT، وهي أدق تفاصيل تستطيع المحاكاة إظهارها.</td>
+</tr>
+<tr class="even">
+<td>Resolution bandwidth (nm)</td>
+<td>0.01 nm</td>
+<td>عرض نطاق دقة أكبر يجمع ضوضاء أكثر في كل نقطة (أرضية ضوضاء أعلى)
+وينعّم الطيف. القدرة الكلية لا تتغير.</td>
+</tr>
+<tr class="odd">
+<td>Horizontal axis</td>
+<td>Wavelength (nm)</td>
+<td>عرض الطيف مقابل الطول الموجي (nm) أو التردد (THz).</td>
+</tr>
+<tr class="even">
+<td>Span (laser signals) (nm)</td>
+<td>0.8 nm</td>
+<td>عرض نافذة الأطوال الموجية لإشارات الليزر (عرض فقط).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> R. Ramaswami, K. N. Sivarajan, G. H.
+Sasaki, Optical Networks: A Practical Perspective, Morgan Kaufmann. G.
+P. Agrawal, Fiber-Optic Communication Systems, Wiley.</p>
+<h3 id="ar-power-chirp-monitor">9.4 Power &amp; Chirp Monitor</h3>
+<p>يعرض القدرة الضوئية P(t) = |E(t)|² والـ chirp أي انحراف التردد Δν(t)
+= (1/2π)·dφ/dt مع الزمن.</p>
+<p><em>المنافذ:</em> دخل: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>القدرة الضوئية</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">P(t)=|E(t)|^{2}</annotation></semantics></math></p>
+<p>تُعرض بالـ mW مقابل الزمن.</p>
+<p><em>الـ chirp (انحراف التردد اللحظي)</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>ν</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mi>π</mi></mrow></mfrac><mfrac><mrow><mi>d</mi><mi>φ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\Delta\nu(t)=\frac{1}{2\pi}\frac{d\varphi(t)}{dt}</annotation></semantics></math></p>
+<p>φ(t) هو طور المجال الضوئي. المعدِّل الخارجي يعطي Δν ≈ 0، والليزر المعدَّل
+مباشرة يعطي Δν كبيراً عند حواف البتات.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bits shown</td>
+<td>32</td>
+<td>عدد البتات المعروضة (عرض فقط).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h3 id="ar-optical-power-meter">9.5 Optical Power Meter</h3>
+<p>يعرض القدرة الضوئية المتوسطة بالـ dBm والواط.</p>
+<p><em>المنافذ:</em> دخل: Optical (ضوئي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>القدرة المتوسطة</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mfrac><mn>1</mn><mi>N</mi></mfrac><munder><mo>∑</mo><mi>i</mi></munder><msup><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>E</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mo>,</mo><mspace width="2.0em"></mspace><mi>P</mi><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">B</mi><mi mathvariant="normal">m</mi></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mn>10</mn><msub><mo>log</mo><mn>10</mn></msub><mfrac><mi>P</mi><mrow><mn>1</mn><mspace width="0.222em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">W</mi></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">P=\frac{1}{N}\sum_{i}|E_i|^{2},\qquad P\,[\mathrm{dBm}]=10\log_{10}\frac{P}{1\ \mathrm{mW}}</annotation></semantics></math></p>
+<p><strong>المصادر:</strong> G. Keiser, Optical Fiber Communications,
+McGraw-Hill.</p>
+<h3 id="ar-time-signal-scope">9.6 Time-Signal Scope</h3>
+<p>يعرض أول البتات من الإشارة مع الزمن. الدخل الضوئي: القدرة بالـ mW.
+الدخل الكهربائي: التيار بالـ mA (أو مستوى الدفع).</p>
+<p><em>المنافذ:</em> دخل: Signal (ضوئي أو كهربائي).</p>
+<p><strong>المعادلات الحاكمة</strong></p>
+<p><em>ما يُعرض</em></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mspace width="1.0em"></mspace><mrow><mi mathvariant="normal">o</mi><mi mathvariant="normal">r</mi></mrow><mspace width="1.0em"></mspace><mi>i</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">P(t)=|E(t)|^{2}\quad \mathrm{or}\quad i(t)</annotation></semantics></math></p>
+<p>الدخل الضوئي: القدرة بالـ mW. الدخل الكهربائي: التيار بالـ mA.</p>
+<p><strong>كيف تغيّر الإعدادات النتيجة</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 14%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>الإعداد</th>
+<th>الافتراضي</th>
+<th>التأثير</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bits shown</td>
+<td>32</td>
+<td>عدد البتات المعروضة (عرض فقط).</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>المصادر:</strong> G. P. Agrawal, Fiber-Optic Communication
+Systems, Wiley.</p>
+<h1 id="ar-المصادر">المصادر</h1>
+<ol type="1">
+<li>G. Keiser, Optical Fiber Communications, McGraw-Hill.</li>
+<li>G. P. Agrawal, Fiber-Optic Communication Systems, Wiley.</li>
+<li>R. Ramaswami, K. N. Sivarajan, G. H. Sasaki, Optical Networks: A
+Practical Perspective, Morgan Kaufmann.</li>
+<li>E. Desurvire, Erbium-Doped Fiber Amplifiers: Principles and
+Applications, Wiley, 1994.</li>
+<li>L. A. Coldren, S. W. Corzine, Diode Lasers and Photonic Integrated
+Circuits, Wiley.</li>
+<li>C. H. Henry, “Theory of the linewidth of semiconductor lasers,” IEEE
+J. Quantum Electron., 1982.</li>
+<li>T. L. Koch, R. A. Linke, “Effect of nonlinear gain reduction on
+semiconductor laser wavelength chirping,” Appl. Phys. Lett., 1986.</li>
+<li>R. J. McIntyre, “Multiplication noise in uniform avalanche diodes,”
+IEEE Trans. Electron Devices, 1966.</li>
+<li>S. D. Personick, “Receiver design for digital fiber optic
+communication systems,” Bell Syst. Tech. J., 1973.</li>
+<li>ITU-T Recommendation G.652: Characteristics of a single-mode optical
+fibre and cable.</li>
+<li>ITU-T Recommendation O.150: Test patterns (PRBS) for digital
+transmission equipment.</li>
+<li>W. E. Thomson, “Delay networks having maximally flat frequency
+characteristics,” Proc. IEE, 1949.</li>
+</ol>
+<p>المعادلات نتائج قياسية من الكتب المنهجية. المصادر هي المراجع المعتادة
+لكل معادلة؛ راجع الطبعة التي تستخدمها لأرقام الفصول والصفحات.</p>
+</div>
+</div>
+<script>
+(function(){var k="osim-theme";try{var t=localStorage.getItem(k);if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}
+var L="osim-help-lang";function setL(l){document.getElementById("en").hidden=l==="ar";document.getElementById("ar").hidden=l!=="ar";var b=document.getElementById("langBtn");b.textContent=l==="ar"?"English":"عربي";b.lang=l==="ar"?"en":"ar";try{localStorage.setItem(L,l)}catch(e){}}
+try{if(localStorage.getItem(L)==="ar")setL("ar")}catch(e){}
+document.getElementById("langBtn").addEventListener("click",function(){setL(document.getElementById("ar").hidden?"ar":"en")});
+document.getElementById("themeBtn").addEventListener("click",function(){var c=document.documentElement.getAttribute("data-theme"),d=c?c==="dark":matchMedia("(prefers-color-scheme: dark)").matches,t=d?"light":"dark";document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem(k,t)}catch(e){}});})();
+</script>
