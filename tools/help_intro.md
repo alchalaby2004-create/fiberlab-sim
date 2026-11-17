@@ -10,12 +10,12 @@ FiberLab Sim is a teaching program for designing and simulating optical fiber li
 2. **Add components.** Drag a component from the library (left) onto the layout. On a phone, tap it.
 3. **Connect.** Drag from an output port (right side of a block) to an input port (left side). Ports and wires have colors: optical (red), electrical (blue), binary (grey, dashed). Only ports of the same kind can be connected. One output can feed several inputs (for example a fiber and a power meter).
 4. **Set the components.** Select a block to see its settings on the right. Press **?** (Help) to see its equations.
-5. **Press ▶ Run.** The program runs the components in the order of the wires. Results appear above the visualizers and in the *Results* area.
+5. **Press ▶ Run** (top right of the layout, or Ctrl+Enter). The program runs the components in the order of the wires. Results appear above the visualizers and in the *Results* area.
 6. **Open a visualizer** (double-click, or *Open graphs*) to see its graphs: eye diagram, Q against sampling time, spectrum, signal in time.
 7. **Sweep.** Change one setting step by step and measure one result (for example Q against fiber length). Copy the table into Word or Excel.
 8. **Global settings** set the bit rate (up to 40 Gb/s), the sequence length (8 to 1024 bits) and the samples per bit (8 to 512) for the whole layout. Use many samples per bit only for short sequences (for example laser chirp studies).
 9. **Export** saves the layout as a file (.json); **Import** opens a layout file (you can also drop the file on the layout).
-10. **Send result** (assignments only, after Run): write your name and section; the program makes a short report with a verification code (your layout and results) and opens your instructor's form, or lets you copy the report. The first time, paste the **class code** (starts with OSC1.) that your instructor gives you. Do not edit the code: the instructor's grader calculates your layout again to check it.
+10. **Send result** (assignments only, after Run): write your name and section; the program makes a short report with a verification code (your layout and results) and opens your instructor's form, or lets you copy the report. Paste the **class code** (starts with OSC1.) from your instructor once, when you press *Start the assignment*. Do not edit the code: the instructor's grader calculates your layout again to check it.
 
 To remove a block or a wire, select it and press *Delete* (or the *Delete* button). *Reset lab* returns to the starting layout of the experiment.
 

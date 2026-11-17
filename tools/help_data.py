@@ -19,7 +19,7 @@ HELP = {
      "bw": "As for NRZ: a low bandwidth rounds the pulses. RZ needs about twice the NRZ bandwidth."},
   src=["agrawal"]),
 "cwlaser": dict(
-  eq=[("Output field", r"E(t)=\sqrt{P_{\mathrm{CW}}},\qquad \nu=\frac{c}{\lambda}", "A single-mode (DFB) laser that stays on. Its linewidth is taken as zero (much smaller than the signal).")],
+  eq=[("Output field", r"E(t)=\sqrt{P_{\mathrm{CW}}},\qquad \nu=\frac{c}{\lambda}", "A single-mode (DFB) laser that stays on. By default its linewidth is zero (much smaller than the signal spectrum); set Δν to add phase noise.")],
   p={"lw": "Laser linewidth Δν (phase noise, a random walk of the phase). It widens the carrier line in the spectrum. 0 = ideal laser (used in the tutorials and assignments); a typical DFB laser has about 1–10 MHz.",
      "power": "Sets the carrier power. After a Mach–Zehnder modulator the average power is about 3 dB lower (half of the time the light is switched off).",
      "lam": "Sets the fiber loss and dispersion (automatic values), the photodiode responsivity R ∝ λ, and the photon energy hν used for the amplifier noise."},

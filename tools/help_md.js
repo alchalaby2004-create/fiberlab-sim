@@ -4,7 +4,7 @@ const { OL } = require('../load.js');
 const LANG = process.argv[2] === 'ar' ? 'ar' : 'en';
 new Function('OL', fs.readFileSync(path.join(__dirname, '../refs.js'), 'utf8'))(OL);
 const U = LANG === 'ar' ? OL.HELP_UI_AR : {}; const T = (x) => U[x] || x;
-const CAT_AR = { 'Transmitters': 'المرسلات', 'Optical fibers': 'الألياف الضوئية', 'Amplifiers and passive': 'المضخمات والمكونات المنفعلة', 'Receivers': 'المستقبلات', 'Visualizers': 'أجهزة العرض' };
+const CAT_AR = { 'Transmitters': 'المرسلات', 'Optical fibers': 'الألياف الضوئية', 'Amplifiers and passive': 'المضخمات والمكونات غير الفعالة', 'Receivers': 'المستقبلات', 'Visualizers': 'أجهزة القياس والعرض' };
 const KN = { opt: 'optical', elec: 'electrical', bin: 'binary', any: 'optical or electrical' };
 const esc = (s) => String(s).replace(/\|/g, '\\|');
 let md = fs.readFileSync(path.join(__dirname, LANG === 'ar' ? 'help_intro_ar.md' : 'help_intro.md'), 'utf8') + '\n';

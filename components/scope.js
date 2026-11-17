@@ -2,7 +2,7 @@
 OL.register({
   type: "scope", name: "Time-Signal Scope", short: "Oscilloscope", category: "Visualizers", instrument: true,
   doc: "Shows the first bits of a signal in time. Optical input: power in mW. Electrical input: current in mA (or drive level).",
-  help: {"eq": [{"t": "What is shown", "tex": "P(t)=|E(t)|^{2}\\quad \\mathrm{or}\\quad i(t)", "n": "Optical input: power in mW. Electrical input: current in mA."}], "params": {"nbits": "Number of bits shown (display only)."}, "extra": "", "src": ["agrawal"], "ar": {"doc": "يعرض أول البتات من الإشارة مع الزمن. الدخل الضوئي: القدرة بالـ mW. الدخل الكهربائي: التيار بالـ mA (أو مستوى الدفع).", "eq": [{"t": "ما يُعرض", "n": "الدخل الضوئي: القدرة بالـ mW. الدخل الكهربائي: التيار بالـ mA."}], "params": {"nbits": "عدد البتات المعروضة (عرض فقط)."}, "extra": ""}},
+  help: {"eq": [{"t": "What is shown", "tex": "P(t)=|E(t)|^{2}\\quad \\mathrm{or}\\quad i(t)", "n": "Optical input: power in mW. Electrical input: current in mA."}], "params": {"nbits": "Number of bits shown (display only)."}, "extra": "", "src": ["agrawal"], "ar": {"doc": "يرسم البتات الأولى من الإشارة مع الزمن: القدرة بالـ mW إذا كان الدخل ضوئياً، والتيار بالـ mA (أو مستوى الدفع) إذا كان كهربائياً.", "eq": [{"t": "ما يُرسم", "n": "دخل ضوئي: القدرة بالـ mW. دخل كهربائي: التيار بالـ mA."}], "params": {"nbits": "عدد البتات المرسومة، ولا يؤثر في الحساب."}, "extra": ""}},
   inputs: [{ id: "in", kind: "any", label: "Signal" }], outputs: [],
   params: [{ key: "nbits", label: "Bits shown", unit: "", type: "number", def: 32, min: 4, max: 256, step: 1 }],
   icon: '<rect x="6" y="4" width="52" height="32" rx="3" class="ic-line"/><polyline points="10,28 18,28 20,12 30,12 32,28 40,28 42,12 54,12" class="ic-line"/>',
