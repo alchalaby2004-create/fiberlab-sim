@@ -14,6 +14,10 @@ out = page + plot + "".join("<script>\n" + s + "\n</script>\n" for s in js)
 name = "fiberlab_sim_offline.html" if inline else "fiberlab_sim.html"
 if inline: out = '<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body>\n' + out + "</body></html>\n"
 os.makedirs(D + "/dist", exist_ok=True); open(D + "/dist/" + name, "w").write(out); print(name, len(out))
+# a stand-alone page for any web server (GitHub Pages): doctype + UTF-8 charset (artifact hosting adds these itself)
+if not inline:
+    sa = '<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body>\n' + out + "</body></html>\n"
+    open(D + "/dist/fiberlab_sim_web.html", "w").write(sa); print("fiberlab_sim_web.html", len(sa))
 
 # ---- grader (instructor only: needs the private files assignments_key.js, asgrade.js, grading.js, grader.*) ----
 PRIV = ["assignments_key.js", "grading.js", "asgrade.js", "grader.js", "grader.html"]

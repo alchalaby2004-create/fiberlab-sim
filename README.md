@@ -39,7 +39,7 @@ This is a **teaching tool**, not a design tool. It does not model fiber nonlinea
 ## Building from source
 
 ```
-python3 build.py                  # docs-ready program  → dist/fiberlab_sim.html (Plotly from CDN)
+python3 build.py                  # web page → dist/fiberlab_sim_web.html (copy to docs/index.html; Plotly from CDN)
 python3 build.py --inline-plotly  # one offline file    → dist/fiberlab_sim_offline.html
 ```
 Each component is one file in `components/`. See [ADDING_COMPONENTS.md](ADDING_COMPONENTS.md) to add a new one. Help text: `tools/help_data.py` (English) and `tools/help_ar.py` (Arabic).
