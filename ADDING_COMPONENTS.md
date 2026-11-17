@@ -9,7 +9,7 @@ Nothing else needs to change: the library, the properties panel, the sweep and t
 - `components/*.js` — one component per file.
 - `labs.js` — the experiments (text + starting layout).
 - `ui.js` — editor, properties, results windows (Plotly), sweep, save/load.
-- `index.html`, `model.html` — page and the "model and equations" section.
+- `app_shell.html`, `model.html` — page and the "model and equations" section.
 - `build.py` — joins everything into one HTML file (`dist/`). `--inline-plotly` makes the offline file.
   New component files are picked up automatically (add the name to ORDER in build.py to set its place in the library).
 

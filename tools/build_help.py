@@ -10,7 +10,7 @@ def part(md, lang):
     main = re.sub(r"(<table.*?</table>)", r'<div class="tw">\1</div>', main, flags=re.S)
     return toc.replace("<nav", '<nav aria-label="Contents"'), main
 toc, main = part(dist + "/help.md", "en"); toc_ar, main_ar = part(dist + "/help_ar.md", "ar")
-idx = open(D + "/index.html").read(); root_css = re.search(r"(:root\{.*?\n\}\n@media \(prefers-color-scheme: dark\)\{.*?\}\}\n:root\[data-theme=\"dark\"\]\{.*?\})", idx, re.S).group(1)
+idx = open(D + "/app_shell.html").read(); root_css = re.search(r"(:root\{.*?\n\}\n@media \(prefers-color-scheme: dark\)\{.*?\}\}\n:root\[data-theme=\"dark\"\]\{.*?\})", idx, re.S).group(1)
 page = """<title>FiberLab Sim Help</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
