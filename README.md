@@ -2,7 +2,8 @@
 
 **A free, browser-based simulator for optical fiber communication links, made for undergraduate laboratory courses.**
 
-By **Dr. Ahmed A. Al-Chalaby** · Version 1.20 beta · License: GPL-3.0
+By **Dr. Ahmed A. Al-Chalaby** · Version 1.20 beta · License: GPL-3.0  
+✉️ Contact: alchalaby2004@gmail.com
 
 🔗 **Open the program:** https://alchalaby2004-create.github.io/fiberlab-sim/  
 📘 **Help (equations, settings and sources for every component):** https://alchalaby2004-create.github.io/fiberlab-sim/help.html
@@ -28,7 +29,7 @@ FiberLab Sim lets students build an optical link on a drawing area (drag compone
 - **Help as Word files:** [English](docs/FiberLab_Sim_Help.docx) · [Arabic](docs/FiberLab_Sim_Help_AR.docx).
 - **Students:** read the student guide ([English](docs/FiberLab_Sim_Student_Guide.docx), [Arabic](docs/FiberLab_Sim_Student_Guide_AR.docx)).
 - **Lab tutorial (Word):** [docs/FiberLab_Sim_Lab_Tutorial.docx](docs/FiberLab_Sim_Lab_Tutorial.docx): theory, steps, result tables and questions for the 9 tutorials and the 7 assignments (student version, without answers).
-- **Instructors:** the grader, the assignment key, the lab tutorial with answers and the instructor guide (English and Arabic) are not in this repository, so students cannot read the solutions. Instructors can ask the author for them.
+- **Instructors:** the grader, the assignment key, the lab tutorial with answers and the instructor guide (English and Arabic) are not in this repository, so students cannot read the solutions. Instructors can ask the author for them at **alchalaby2004@gmail.com**.
 
 ## Models and limits
 
@@ -72,6 +73,6 @@ Third-party libraries: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - ملف المساعدة (Word): [عربي](docs/FiberLab_Sim_Help_AR.docx) · [English](docs/FiberLab_Sim_Help.docx).
 - دليل الطالب: [عربي](docs/FiberLab_Sim_Student_Guide_AR.docx) · [English](docs/FiberLab_Sim_Student_Guide.docx).
 - ملف الدروس (Word): [docs/FiberLab_Sim_Lab_Tutorial.docx](docs/FiberLab_Sim_Lab_Tutorial.docx)، وفيه النظرية والخطوات وجداول النتائج والأسئلة للدروس التسعة والواجبات السبعة (نسخة الطالب، دون إجابات).
-- لا يحتوي هذا المستودع على برنامج التصحيح، ولا مفتاح الواجبات، ولا ملف الدروس بإجاباته، ولا دليل الأستاذ، حتى لا يطّلع الطلبة على الحلول. ويمكن للأساتذة طلبها من المؤلف.
+- لا يحتوي هذا المستودع على برنامج التصحيح، ولا مفتاح الواجبات، ولا ملف الدروس بإجاباته، ولا دليل الأستاذ، حتى لا يطّلع الطلبة على الحلول. ويمكن للأساتذة طلبها من المؤلف على البريد **alchalaby2004@gmail.com**.
 - البرنامج أداة تعليمية، ولا يحسب الظواهر اللاخطية في الليف ولا PMD ولا أنظمة WDM.
 - هذه نسخة تجريبية، فنرحب بملاحظاتكم وبلاغاتكم عن الأخطاء في صفحة [Issues](../../issues).
