@@ -26,7 +26,7 @@ FiberLab Sim lets students build an optical link on a drawing area (drag compone
 
 - **Online:** open the link above in a recent browser (Chrome, Edge, Firefox, Safari) on a computer.
 - **Offline:** download [`docs/FiberLab_Sim_offline.html`](docs/FiberLab_Sim_offline.html) and open it; it works without internet.
-- **Help as Word files:** [English](docs/FiberLab_Sim_Help.docx) · [Arabic](docs/FiberLab_Sim_Help_AR.docx).
+- **Help as a Word file:** [docs/FiberLab_Sim_Help.docx](docs/FiberLab_Sim_Help.docx). The help is also in Arabic inside the program and on the help page (button «عربي»).
 - **Students:** read the student guide ([English](docs/FiberLab_Sim_Student_Guide.docx), [Arabic](docs/FiberLab_Sim_Student_Guide_AR.docx)).
 - **Lab tutorial (Word):** [docs/FiberLab_Sim_Lab_Tutorial.docx](docs/FiberLab_Sim_Lab_Tutorial.docx): theory, steps, result tables and questions for the 9 tutorials and the 7 assignments (student version, without answers).
 - **Instructors:** the grader, the assignment key, the lab tutorial with answers and the instructor guide (English and Arabic) are not in this repository, so students cannot read the solutions. Instructors can ask the author for them at **alchalaby2004@gmail.com**.
@@ -61,18 +61,5 @@ Third-party libraries: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## بالعربية
 
-**FiberLab Sim** برنامج مجاني يعمل في متصفح الإنترنت، لمحاكاة وصلات الاتصالات بالألياف الضوئية، وقد صُمّم لمختبرات طلبة البكالوريوس.
-إعداد: **Dr. Ahmed A. Al-Chalaby** · الإصدار 1.20 (تجريبي) · الرخصة GPL-3.0
-
-- **افتح البرنامج:** https://alchalaby2004-create.github.io/fiberlab-sim/
-- يبني الطالب الوصلة بسحب المكونات وربطها، ثم يضغط **▶ Run** فيرى مخطط العين وقيمة Q ومعدل الخطأ BER والطيف والقدرة والـ chirp.
-- لكل مكوّن نافذة مساعدة تشرح معادلاته وأثر كل إعداد فيه ومصادره، بالعربية والإنجليزية.
-- في البرنامج **9 دروس** بمخططات جاهزة، و**7 واجبات** يحصل فيها كل طالب على قيم شخصية تُحسب من اسمه الثلاثي، فيرسل حله إلى نموذج Google الخاص بأستاذه، ويصححه الأستاذ ببرنامج التصحيح.
-- يضم البرنامج 24 مكوّناً، منها ستة أجهزة قياس: مقياس العين وBER، ومراقب الطيف الضوئي، ومراقب الطيف الكهربائي، ومراقب القدرة والـ chirp، وراسم الإشارة، ومقياس القدرة.
-- يعمل البرنامج أيضاً دون إنترنت: نزّل الملف [`docs/FiberLab_Sim_offline.html`](docs/FiberLab_Sim_offline.html) وافتحه.
-- ملف المساعدة (Word): [عربي](docs/FiberLab_Sim_Help_AR.docx) · [English](docs/FiberLab_Sim_Help.docx).
-- دليل الطالب: [عربي](docs/FiberLab_Sim_Student_Guide_AR.docx) · [English](docs/FiberLab_Sim_Student_Guide.docx).
-- ملف الدروس (Word): [docs/FiberLab_Sim_Lab_Tutorial.docx](docs/FiberLab_Sim_Lab_Tutorial.docx)، وفيه النظرية والخطوات وجداول النتائج والأسئلة للدروس التسعة والواجبات السبعة (نسخة الطالب، دون إجابات).
-- لا يحتوي هذا المستودع على برنامج التصحيح، ولا مفتاح الواجبات، ولا ملف الدروس بإجاباته، ولا دليل الأستاذ، حتى لا يطّلع الطلبة على الحلول. ويمكن للأساتذة طلبها من المؤلف على البريد **alchalaby2004@gmail.com**.
-- البرنامج أداة تعليمية، ولا يحسب الظواهر اللاخطية في الليف ولا PMD ولا أنظمة WDM.
-- هذه نسخة تجريبية، فنرحب بملاحظاتكم وبلاغاتكم عن الأخطاء في صفحة [Issues](../../issues).
+**FiberLab Sim** برنامج مجاني يعمل في المتصفح لمحاكاة وصلات الألياف الضوئية في مختبرات طلبة البكالوريوس، ومساعدته متوفرة بالعربية داخل البرنامج (زر «عربي»). [افتح البرنامج](https://alchalaby2004-create.github.io/fiberlab-sim/)
+دليل الطالب بالعربية: [FiberLab_Sim_Student_Guide_AR.docx](docs/FiberLab_Sim_Student_Guide_AR.docx) · للتواصل وطلب ملفات الأستاذ: alchalaby2004@gmail.com
