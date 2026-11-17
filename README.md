@@ -26,6 +26,7 @@ FiberLab Sim lets students build an optical link on a drawing area (drag compone
 - **Online:** open the link above in a recent browser (Chrome, Edge, Firefox, Safari) on a computer.
 - **Offline:** download [`docs/FiberLab_Sim_offline.html`](docs/FiberLab_Sim_offline.html) and open it; it works without internet.
 - **Students:** read the student guide ([English](docs/FiberLab_Sim_Student_Guide.docx), [Arabic](docs/FiberLab_Sim_Student_Guide_AR.docx)).
+- **Lab tutorial (Word):** [docs/FiberLab_Sim_Lab_Tutorial.docx](docs/FiberLab_Sim_Lab_Tutorial.docx): theory, steps, result tables and questions for the 9 tutorials and the 7 assignments (student version, without answers).
 - **Instructors:** the grader and the answer keys are not in this repository (so students cannot read the solutions). Instructors can ask the author for the grader and the instructor guide.
 
 ## Models and limits
@@ -63,6 +64,7 @@ Third-party libraries: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 - **9 دروس** بمخططات جاهزة، و**7 واجبات** بقيم شخصية تُحسب من الاسم الثلاثي للطالب، يُرسل حلها إلى نموذج Google الخاص بالأستاذ ويصححها برنامج المصحح.
 - يعمل أيضاً بدون إنترنت: نزّل الملف [`docs/FiberLab_Sim_offline.html`](docs/FiberLab_Sim_offline.html).
 - دليل الطالب: [عربي](docs/FiberLab_Sim_Student_Guide_AR.docx) · [English](docs/FiberLab_Sim_Student_Guide.docx).
+- ملف الدروس (Word): [docs/FiberLab_Sim_Lab_Tutorial.docx](docs/FiberLab_Sim_Lab_Tutorial.docx): النظرية والخطوات وجداول النتائج والأسئلة للدروس التسعة والواجبات السبعة (نسخة الطالب، بلا إجابات).
 - المصحح ومفاتيح الإجابة ليست في هذا المستودع حتى لا يطّلع الطلبة على الحلول؛ يمكن للأساتذة طلبها من المؤلف.
 - البرنامج أداة تعليمية، ولا يشمل اللاخطية في الليف ولا PMD ولا أنظمة WDM.
 - هذه نسخة تجريبية: أرسل الملاحظات والمشاكل في [Issues](../../issues).
