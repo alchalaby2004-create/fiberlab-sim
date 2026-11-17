@@ -1928,6 +1928,17 @@ OL.SUBMIT = {
   function askIdent(after) {
     openWin("Start the assignment", function (b) {
       b.appendChild(h("p", { class: "small" }, "Assignments give each student personal values, made from your full name. Write your full name (first, father's and grandfather's names) exactly as in the university records, and always write it the same way. You will send your result with the same name."));
+      // 1) class code first: it tells the program where to send the result (the instructor's form)
+      var cls = null; try { cls = OL.readClassCode && OL.readClassCode(localStorage.getItem("osim-class")); } catch (e) {}
+      var cbox = h("div", { class: "note" }), ci = h("input", { type: "text", style: "width:100%;margin:4px 0", placeholder: "OSC1.…", "aria-label": "Class code" });
+      function drawCls() {
+        cbox.innerHTML = "";
+        if (cls) { cbox.appendChild(h("b", {}, "1. Class: ")); cbox.appendChild(document.createTextNode((cls.name || "—") + (cls.instructor ? " · Instructor: " + cls.instructor : "") + "  ")); var cb = h("button", { class: "btn", type: "button" }, "Change class"); cb.addEventListener("click", function () { cls = null; drawCls(); }); cbox.appendChild(cb); }
+        else { cbox.appendChild(h("b", {}, "1. Class code from your instructor")); cbox.appendChild(document.createTextNode(" (starts with OSC1.):")); cbox.appendChild(ci);
+          cbox.appendChild(h("span", { class: "small muted" }, "No class code? Leave it empty: you can still do the assignment and copy your report at the end.")); }
+      }
+      drawCls(); b.appendChild(cbox);
+      b.appendChild(h("p", { class: "small", style: "margin:10px 0 2px" }, "2. Your details:"));
       var form = h("div", { class: "form sendform" }), cur = ident() || {};
       function fld(label, inp) { var f = h("div", { class: "field" }); f.appendChild(h("label", {}, label)); f.appendChild(inp); form.appendChild(f); return inp; }
       var nm = fld("Full name", h("input", { type: "text", autocomplete: "name" })), sc = fld("Section", h("input", { type: "text" })), sid = fld("Student number (optional)", h("input", { type: "text" }));
@@ -1936,6 +1947,7 @@ OL.SUBMIT = {
       go.addEventListener("click", function () {
         var o = { name: nm.value.trim(), sec: sc.value.trim(), sid: sid.value.trim() };
         if (o.name.split(/\s+/).filter(Boolean).length < 2 || !o.sec) { m.textContent = "Write your full name (at least two names) and your section."; m.style.color = "var(--bad)"; return; }
+        if (!cls && ci.value.trim()) { var cc = OL.readClassCode && OL.readClassCode(ci.value); if (!cc) { m.textContent = "This class code is not valid. Copy it again from your instructor's message (it starts with OSC1.), or leave the box empty."; m.style.color = "var(--bad)"; return; } try { localStorage.setItem("osim-class", cc.code); } catch (e) {} }
         store("osim-id", JSON.stringify(o)); store("osim-name", o.name); store("osim-sec", o.sec); store("osim-sid", o.sid); closeWin(); if (after) after();
       });
     });
@@ -1944,7 +1956,7 @@ OL.SUBMIT = {
     var a = OL.ASSIGN.get(lab.id), me = ident(), box = h("div", { class: "tasknote" });
     if (!me) { box.appendChild(h("b", {}, "Start: ")); box.appendChild(document.createTextNode("write your full name to get your personal values. ")); var st = h("button", { class: "btn primary", type: "button" }, "Start the assignment"); st.addEventListener("click", function () { askIdent(function () { loadLab(lab.id); }); }); box.appendChild(st); t.appendChild(box); return; }
     var v = OL.ASSIGN.personal(a, OL.ASSIGN.keyOf(me.name));
-    var hd = h("p", { style: "margin:0 0 6px" }); hd.appendChild(h("b", {}, "Student: ")); hd.appendChild(document.createTextNode(me.name + " · Section " + me.sec + (me.sid ? " · No. " + me.sid : "") + "  ")); var ch = h("button", { class: "btn", type: "button" }, "Change"); ch.addEventListener("click", function () { askIdent(function () { loadLab(lab.id); }); }); hd.appendChild(ch); box.appendChild(hd);
+    var hd = h("p", { style: "margin:0 0 6px" }); hd.appendChild(h("b", {}, "Student: ")); hd.appendChild(document.createTextNode(me.name + " · Section " + me.sec + (me.sid ? " · No. " + me.sid : "") + (function () { try { var c = OL.readClassCode && OL.readClassCode(localStorage.getItem("osim-class")); return c ? " · Class: " + c.name : " · No class code"; } catch (e) { return ""; } })() + "  ")); var ch = h("button", { class: "btn", type: "button" }, "Change"); ch.addEventListener("click", function () { askIdent(function () { loadLab(lab.id); }); }); hd.appendChild(ch); box.appendChild(hd);
     var tb = h("table", { class: "pv" }); tb.innerHTML = "<thead><tr><th>Your personal values</th><th>Value</th></tr></thead>"; var tbd = h("tbody");
     a.personal.forEach(function (q) { var tr = h("tr"); tr.appendChild(h("td", {}, q.label)); tr.appendChild(h("td", {}, v[q.key] + (q.unit ? " " + q.unit : ""))); tbd.appendChild(tr); }); tb.appendChild(tbd); box.appendChild(tb);
     var tk = h("p", { style: "margin:6px 0 0" }); tk.appendChild(h("b", {}, "Task: ")); tk.appendChild(document.createTextNode(a.task + " Then press Send result.")); box.appendChild(tk);
